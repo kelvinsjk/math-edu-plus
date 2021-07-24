@@ -1,6 +1,6 @@
-import resolve from 'rollup-plugin-node-resolve';
-import commonjs from 'rollup-plugin-commonjs';
-import typescript from 'rollup-plugin-typescript';
+import resolve from '@rollup/plugin-node-resolve';
+import commonjs from '@rollup/plugin-commonjs';
+import typescript from 'rollup-plugin-ts';
 import pkg from './package.json';
 
 export default [
@@ -30,6 +30,7 @@ export default [
     plugins: [
       typescript() // so Rollup can convert TypeScript to JavaScript
     ],
+    external: ['math-edu'],
     output: [
       { file: pkg.main, format: 'cjs' },
       { file: pkg.module, format: 'es' }

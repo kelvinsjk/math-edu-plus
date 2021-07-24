@@ -5,11 +5,11 @@
   "main": "lib/index.cjs.js",
   "module": "lib/index.esm.js",
   "browser": "lib/index.umd.js",
-  "types": "lib/index.d.ts",
+  "types": "lib/index.esm.d.ts",
   "scripts": {
     "docs": "typedoc --sort instance-first --sort source-order",
-    "pretest": "npm run build",
     "test": "jest --config jestconfig.json --coverage",
+    "quicktest": "jest --config jestconfig.json",
     "format": "prettier --write \"src/**/*.ts\"",
     "lint": "eslint --ignore-path .gitignore",
     "prepare": "npm run build",
@@ -34,15 +34,21 @@
   },
   "homepage": "https://github.com/kelvinsjk/math-edu-plus#readme",
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^19.0.1",
+    "@rollup/plugin-node-resolve": "^13.0.2",
     "@types/jest": "^26.0.24",
+    "@typescript-eslint/eslint-plugin": "^4.28.3",
+    "@typescript-eslint/parser": "^4.28.3",
     "eslint": "^7.31.0",
     "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-jest": "^24.3.6",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.1.0",
     "jest": "^27.0.6",
     "prettier": "^2.3.2",
     "rollup": "^2.53.2",
-    "rollup-plugin-commonjs": "^10.1.0",
-    "rollup-plugin-node-resolve": "^5.2.0",
-    "rollup-plugin-typescript": "^1.0.1",
+    "rollup-plugin-ts": "^1.4.0",
     "ts-jest": "^27.0.3",
     "ts-node": "^10.1.0",
     "tslib": "^2.3.0",
@@ -52,5 +58,8 @@
   },
   "files": [
     "lib"
-  ]
+  ],
+  "dependencies": {
+    "math-edu": "^0.0.5"
+  }
 }
