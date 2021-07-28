@@ -65,7 +65,7 @@ test('function chain', () => {
   expect(`${twoThird_x_MINUS_1.inverse()}`).toBe('f(x) = \\frac{3}{2} x + 1')
 
   const h = new FunctionChain(x_MINUS_ONE, xSquare);
-  expect(`${h}`).toBe('f(x) = ( x -1 )^2')
+  expect(`${h}`).toBe('f(x) = \\left( x -1 \\right)^2')
   const restricted = new BasicFunction('x+a', -1, { domain: [new Interval(3), new Interval(1,2)] });
   const g = new FunctionChain(restricted, oneOver_x);
   expect(`${g}`).toBe('f(x) = \\frac{1}{ x -1 }')

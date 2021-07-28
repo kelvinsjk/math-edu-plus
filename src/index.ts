@@ -30,8 +30,8 @@ import
 } from '../../math-edu/src/index';
 
 import { getRandomInts } from './fns/random/generateMultiple';
-import Interval from './fns/classes/intervalClass';
-import {BasicFunction, GeneralFunction, FunctionChain, compose, canCompose} from './fns/classes/functionClasses';
+import Interval from './classes/intervalClass';
+import {BasicFunction, GeneralFunction, FunctionChain, compose, canCompose} from './classes/functionClasses';
 
 export {
   Fraction,

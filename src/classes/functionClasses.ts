@@ -1,5 +1,5 @@
   // import { Fraction, Expression } from 'math-edu'; TODO:
-import { Fraction, Expression, Term, Polynomial } from '../../../../math-edu/src/index';
+import { Fraction, Expression, Term, Polynomial } from '../../../math-edu/src/index';
 import Interval from './intervalClass';
 
 /**
@@ -309,7 +309,7 @@ function compose(f: GeneralFunction, g: BasicFunction): GeneralFunction {
       //expression = new Polynomial([1], { initialDegree: a as number, variableAtom: f.expression.toString() });
       let expressionString = f.expression.toString();
       const power = a.toString().length > 1 ? `^{${a}}` : `^${a}`;
-      expressionString = expressionString.length > 1 ? `( ${expressionString} )` : expressionString;
+      expressionString = expressionString.length > 1 ? `\\left( ${expressionString} \\right)` : expressionString;
       const term = new Term(1, `${expressionString}${power}`);
       expression = new Expression(term);
     } else {

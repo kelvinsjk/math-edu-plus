@@ -1,5 +1,5 @@
 // import { Fraction } from 'math-edu'; TODO:
-import { Fraction } from '../../../../math-edu/src/index';
+import { Fraction } from '../../../math-edu/src/index';
 
 /**
  * Interval class
