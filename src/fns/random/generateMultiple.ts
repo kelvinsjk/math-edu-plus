@@ -1,8 +1,5 @@
 // import { getRandomInt } from 'math-edu';
-import {
-  getRandomInt,
-} from
-  'math-edu';
+import { getRandomInt } from 'math-edu';
 // '../../../../math-edu/src/index';
 
 // get n random integers between lb and up
@@ -16,8 +13,8 @@ function getRandomInts(n: number, options?: randomIntsOptions): number[] {
     unique: true,
     min: -9,
     max: 9,
-    avoid: []
-  }
+    avoid: [],
+  };
   const optionsObject = { ...defaultOptions, ...options };
   const max = Math.floor(optionsObject.max);
   const min = Math.ceil(optionsObject.min);
@@ -26,7 +23,7 @@ function getRandomInts(n: number, options?: randomIntsOptions): number[] {
   if (!Number.isInteger(n) || n < 1) {
     throw new Error('getRandomInts ERROR: n must be a positive integer');
   }
-  if ((unique && max - min + 1 - avoid.length < n) || min > max ) {
+  if ((unique && max - min + 1 - avoid.length < n) || min > max) {
     throw new Error('getRandomInts ERROR: less numbers available then required');
   }
   const integers: number[] = [];
@@ -37,25 +34,25 @@ function getRandomInts(n: number, options?: randomIntsOptions): number[] {
       avoid.push(newInt);
     }
   }
-  return integers
+  return integers;
 }
 
-export {getRandomInts}
+export { getRandomInts };
 
 ////
 // interfaces
 ////
 
 /**
- * 
+ *
  */
-interface randomIntsOptions{
+interface randomIntsOptions {
   /** whether the integers returned must be unique (or if repetition is allowed) */
-  unique?: boolean,
+  unique?: boolean;
   /** min (inclusive) */
-  min?: number,
+  min?: number;
   /** max (inclusive) */
-  max?: number,
+  max?: number;
   /** numbers to avoid */
-  avoid?: number[]
+  avoid?: number[];
 }

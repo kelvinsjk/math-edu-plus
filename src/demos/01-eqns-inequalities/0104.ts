@@ -1,18 +1,13 @@
 import { encode, decode } from '../../fns/encode/encoders';
 
-
 //import {
 //  getRandomFrac, TODO: update
-//  getRandomInt, 
+//  getRandomInt,
 //  Fraction, getRandomLinear
 //} from 'math-edu';
-import {
-  getRandomInt, Expression
-} from '../../../../math-edu/src/index';
+import { getRandomInt, Expression } from '../../../../math-edu/src/index';
 
-import {
-  ExpFn, PowerFn, bisection, simpsons, integrateByParts
-} from '../../index';
+import { ExpFn, PowerFn, bisection, simpsons, integrateByParts } from '../../index';
 
 /**
  * generate qn1004: equations and inequalities
@@ -22,18 +17,19 @@ function qn0104(options?: qnOptions): qnOutput {
   // options
   const defaultOptions = {
     qnCode: '',
-  }
+  };
   const optionsObject = { ...defaultOptions, ...options };
 
   // generate variables
   let questions: string[], answers: string[], variables: variablesObject;
   let n: number;
-  if (optionsObject.qnCode) { // qnCode provided
+  if (optionsObject.qnCode) {
+    // qnCode provided
     [n] = decode(optionsObject.qnCode) as [number];
     [variables, questions, answers] = variablesToQn(n);
   } else {
     // generate qn type
-    n = getRandomInt(3,9);
+    n = getRandomInt(3, 9);
     [variables, questions, answers] = variablesToQn(n);
   }
   const variablesArray = [variables.n];
@@ -41,23 +37,22 @@ function qn0104(options?: qnOptions): qnOutput {
     variables: variables,
     qnCode: encode(...variablesArray),
     questions: questions,
-    answers: answers
-  }
+    answers: answers,
+  };
 }
 
 interface qnOptions {
-  qnCode?: string
+  qnCode?: string;
 }
 interface variablesObject {
-  n: number
+  n: number;
 }
 interface qnOutput {
-  variables: variablesObject,
-  qnCode: string,
-  questions: string[],
-  answers: string[]
+  variables: variablesObject;
+  qnCode: string;
+  questions: string[];
+  answers: string[];
 }
-
 
 function variablesToQn(n: number): [variablesObject, string[], string[]] {
   const variables: variablesObject = { n };
@@ -79,15 +74,15 @@ function variablesToQn(n: number): [variablesObject, string[], string[]] {
   const definite = exp2xIntegral.subtract(nx_exIntegral).add(n2x2Integral);
   const ansA = `\\pi \\left( ${definite} \\right)`;
 
-  const alpha = bisection(x => ex.toNumberFunction()(x) - nx.toNumberFunction()(x), 0, 1);
-  const beta = bisection(x => ex.toNumberFunction()(x) - nx.toNumberFunction()(x), 1, 4);
+  const alpha = bisection((x) => ex.toNumberFunction()(x) - nx.toNumberFunction()(x), 0, 1);
+  const beta = bisection((x) => ex.toNumberFunction()(x) - nx.toNumberFunction()(x), 1, 4);
   const ansAlpha = `\\alpha = ${alpha.toFixed(3)}`;
   const ansBeta = `\\beta = ${beta.toFixed(3)}`;
   const ansC1 = `x < ${alpha.toFixed(3)}`;
   const ansC2 = `x > ${beta.toFixed(3)}`;
 
-  const area = -simpsons(x => ex.toNumberFunction()(x) - nx.toNumberFunction()(x), alpha, beta);
-  
+  const area = -simpsons((x) => ex.toNumberFunction()(x) - nx.toNumberFunction()(x), alpha, beta);
+
   const ans = [ansA, ansAlpha, ansBeta, ansC1, ansC2, area.toFixed(2)];
 
   return [variables, [qn], ans];

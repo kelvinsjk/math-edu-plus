@@ -1,6 +1,6 @@
 /**
  * implementation of the bisection method for numerical root finding.
- * 
+ *
  * @param f function
  * @param lower lower bound (sign must be different at lower and upper)
  * @param upper upper bound (sign must be different at lower and upper)

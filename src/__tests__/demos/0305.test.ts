@@ -3,8 +3,16 @@ import { qn0305 } from '../../demos/03-graphs/0305';
 import { encode } from '../../fns/encode/encoders';
 
 const qCode1 = encode(1, 2, 3, 2);
-const { questions: [q1A, q1B, q1C, q1D], answers: [a1a1, a1a2, a1b1, a1b2, a1c1, a1c2 ], qnCode: qc1 } = qn0305({ qnCode: qCode1 });
-const { questions: [q2A, q2B, q2C, q2D], answers: [a2a1, a2a2, a2b1, a2b2, a2c1, a2c2 ], qnCode: qc2 } = qn0305({ qnCode: '2J24' });
+const {
+  questions: [q1A, q1B, q1C, q1D],
+  answers: [a1a1, a1a2, a1b1, a1b2, a1c1, a1c2],
+  qnCode: qc1,
+} = qn0305({ qnCode: qCode1 });
+const {
+  questions: [q2A, q2B, q2C, q2D],
+  answers: [a2a1, a2a2, a2b1, a2b2, a2c1, a2c2],
+  qnCode: qc2,
+} = qn0305({ qnCode: '2J24' });
 
 //console.log(q2A);
 //console.log(q2B);
@@ -46,16 +54,20 @@ test('1001', () => {
   expect(a2c1).toBe('Translate by 4 units in the positive');
   expect(a2c2).toBe('x');
   expect(qc2).toBe('2J24');
-  
-  
-  for (let i = 0; i < 30; i++){
-    const { questions: [q], qnCode: qnCode } = qn0305();
-    const { questions: [q2] } = qn0305({ qnCode: qnCode });
+
+  for (let i = 0; i < 30; i++) {
+    const {
+      questions: [q],
+      qnCode: qnCode,
+    } = qn0305();
+    const {
+      questions: [q2],
+    } = qn0305({ qnCode: qnCode });
     expect(q).toBe(q2);
   }
 
-  expect(() => qn0305({type: 1})).not.toThrow();
-  expect(() => qn0305({type: 2})).not.toThrow();
+  expect(() => qn0305({ type: 1 })).not.toThrow();
+  expect(() => qn0305({ type: 2 })).not.toThrow();
   //expect(() => qn1302({type: 3})).not.toThrow();
   //expect(() => qn1302({type: 4})).not.toThrow();
-})
+});

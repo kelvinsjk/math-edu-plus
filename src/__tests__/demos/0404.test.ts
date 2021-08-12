@@ -3,8 +3,16 @@ import { qn0404 } from '../../demos/04-apgp/0404';
 import { encode } from '../../fns/encode/encoders';
 
 const qCode1 = encode(1, 3, 2, 4);
-const { questions: [q1M, q1N, q1A, q1B], answers: [a1a, a1b, a1c], qnCode: qc1 } = qn0404({ qnCode: qCode1 });
-const { questions: [q2M, q2N, q2A, q2B], answers: [a2a, a2b, a2c], qnCode: qc2 } = qn0404({ qnCode: '2534' });
+const {
+  questions: [q1M, q1N, q1A, q1B],
+  answers: [a1a, a1b, a1c],
+  qnCode: qc1,
+} = qn0404({ qnCode: qCode1 });
+const {
+  questions: [q2M, q2N, q2A, q2B],
+  answers: [a2a, a2b, a2c],
+  qnCode: qc2,
+} = qn0404({ qnCode: '2534' });
 
 //console.log(q2A);
 //console.log(q2B);
@@ -42,8 +50,13 @@ test('0404', () => {
   expect(qc2).toBe('2534');
 
   for (let i = 0; i < 30; i++) {
-    const { questions: [q], qnCode: qnCode } = qn0404();
-    const { questions: [q2] } = qn0404({ qnCode: qnCode });
+    const {
+      questions: [q],
+      qnCode: qnCode,
+    } = qn0404();
+    const {
+      questions: [q2],
+    } = qn0404({ qnCode: qnCode });
     expect(q).toBe(q2);
   }
 
@@ -51,4 +64,4 @@ test('0404', () => {
   expect(() => qn0404({ type: 2 })).not.toThrow();
   //expect(() => qn1302({type: 3})).not.toThrow();
   //expect(() => qn1302({type: 4})).not.toThrow();
-})
+});

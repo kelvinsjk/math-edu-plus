@@ -24,7 +24,7 @@ import { encode } from '../../fns/encode/encoders';
 
 test('0201', () => {
   expect(true).toBe(true);
-/*   expect(q1).toBe("\\frac{ 2 x^2 - x - 19 }{ x^2 + 3 x + 2 } > 1");
+  /*   expect(q1).toBe("\\frac{ 2 x^2 - x - 19 }{ x^2 + 3 x + 2 } > 1");
   expect(a1[0]).toBe("x < - 3");
   expect(a1[1]).toBe("-2 < x < -1");
   expect(a1[2]).toBe("x > 7");
@@ -59,4 +59,4 @@ test('0201', () => {
   expect(() => qn0101({type: 4})).not.toThrow();
   expect(() => qn0101({type: 5})).not.toThrow();
   expect(() => qn0101({type: 6})).not.toThrow(); */
-})
+});

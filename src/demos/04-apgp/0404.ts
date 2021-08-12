@@ -1,53 +1,51 @@
 import { encode, decode } from '../../fns/encode/encoders';
 //import { getRandomInts } from '../../fns/random/generateMultiple';
 
-
 //import {
 //  getRandomFrac, TODO: update
-//  getRandomInt, 
+//  getRandomInt,
 //  Fraction, getRandomLinear
 //} from 'math-edu';
-import {
-  Fraction, Term, Expression, Polynomial, getRandomInt, solveQuadratic
-} from '../../../../math-edu/src/index';
+import { Fraction, Term, Expression, Polynomial, getRandomInt, solveQuadratic } from '../../../../math-edu/src/index';
 
 interface variablesObject {
-  m: number,
-  mAdd: number,
-  k: number,
-  type: number
+  m: number;
+  mAdd: number;
+  k: number;
+  type: number;
 }
 
 /**
  * generate qn0404: ap, gp
- * 
+ *
  * @returns `[qns, answers, qnCode]`
- * 
+ *
  * @param options `{type: 1-2, qnCode: string}`
  */
 function qn0404(options?: qnOptions): qnOutput {
   // options
   const defaultOptions = {
     type: 0,
-    qnCode: ''
-  }
+    qnCode: '',
+  };
   const optionsObject = { ...defaultOptions, ...options };
 
   // generate variables
   let type: number;
   let questions: string[], answers: string[], variables: variablesObject;
-  if (optionsObject.qnCode) { // qnCode provided
+  if (optionsObject.qnCode) {
+    // qnCode provided
     let restOfVariables: number[];
     [type, ...restOfVariables] = decode(optionsObject.qnCode) as [number, ...number[]];
     [variables, questions, answers] = variablesToQn(type, restOfVariables);
   } else {
     // generate qn type
-    type = (optionsObject.type === 0) ? getRandomInt(1, 2) : optionsObject.type;
+    type = optionsObject.type === 0 ? getRandomInt(1, 2) : optionsObject.type;
     // generate variables
     const m = getRandomInt(2, 9);
     const mAdd = getRandomInt(1, Math.min(m - 1, 9));
     const n = m + mAdd;
-    const kMax = Math.floor((Math.floor(m * m / (2 * m - n)) + 1) / 2);
+    const kMax = Math.floor((Math.floor((m * m) / (2 * m - n)) + 1) / 2);
     const k = getRandomInt(1, Math.min(kMax - 1, 9));
     [variables, questions, answers] = variablesToQn(type, [m, mAdd, k]);
   }
@@ -56,26 +54,30 @@ function qn0404(options?: qnOptions): qnOutput {
     variables: variables,
     qnCode: encode(...variablesArray),
     questions: questions,
-    answers: answers
-  }
+    answers: answers,
+  };
 }
 
 interface qnOptions {
-  type?: number,
-  qnCode?: string
+  type?: number;
+  qnCode?: string;
 }
 interface qnOutput {
-  variables: variablesObject,
-  qnCode: string,
-  questions: string[],
-  answers: string[]
+  variables: variablesObject;
+  qnCode: string;
+  questions: string[];
+  answers: string[];
 }
 
-
 function variablesToQn(type: number, restOfVariables: number[]): [variablesObject, string[], string[]] {
-  const m = restOfVariables[0], mAdd = restOfVariables[1], k = restOfVariables[2];
+  const m = restOfVariables[0],
+    mAdd = restOfVariables[1],
+    k = restOfVariables[2];
   const variables: variablesObject = {
-    m, mAdd, k, type
+    m,
+    mAdd,
+    k,
+    type,
   };
   const n = m + mAdd;
   // construct eqn
@@ -83,7 +85,8 @@ function variablesToQn(type: number, restOfVariables: number[]): [variablesObjec
   if (type === 1) {
     const poly = new Polynomial([m, -n, n - m], { variableAtom: 'r' });
     eqn = `${poly} = 0`;
-  } else { // type === 2
+  } else {
+    // type === 2
     const m2d2 = new Term(m * m, 'd^2');
     const adTerm = new Term(2 * m - n, 'ad');
     const exp = new Expression(m2d2, adTerm);
@@ -110,10 +113,30 @@ function variablesToQn(type: number, restOfVariables: number[]): [variablesObjec
   const ans = [convergentReason, sInfAns, cAns];
 
   // nth term
-  const numberToString = ['', 'first', 'second', 'third', 'fourth', 'fifth', 'sixth', 'seventh', 'eighth', 'ninth', 'tenth',
-    'eleventh', 'twelfth', 'thirteenth', 'fourteenth', 'fifteenth', 'sixteenth', 'seventeenth', 'eighteenth', 'nineteenth'];
+  const numberToString = [
+    '',
+    'first',
+    'second',
+    'third',
+    'fourth',
+    'fifth',
+    'sixth',
+    'seventh',
+    'eighth',
+    'ninth',
+    'tenth',
+    'eleventh',
+    'twelfth',
+    'thirteenth',
+    'fourteenth',
+    'fifteenth',
+    'sixteenth',
+    'seventeenth',
+    'eighteenth',
+    'nineteenth',
+  ];
 
-  return [variables, [numberToString[m+1], numberToString[n+1], eqn, `${ka}`], ans];
+  return [variables, [numberToString[m + 1], numberToString[n + 1], eqn, `${ka}`], ans];
 }
 
 export { qn0404 };

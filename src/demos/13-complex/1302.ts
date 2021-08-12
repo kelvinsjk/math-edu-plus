@@ -1,21 +1,18 @@
 import { encode, decode } from '../../fns/encode/encoders';
 import { getRandomInts } from '../../fns/random/generateMultiple';
 
-
 //import {
 //  getRandomFrac, TODO: update
-//  getRandomInt, 
+//  getRandomInt,
 //  Fraction, getRandomLinear
 //} from 'math-edu';
-import {
-  Complex, Term, Expression, getRandomInt
-} from '../../../../math-edu/src/index';
+import { Complex, Term, Expression, getRandomInt } from '../../../../math-edu/src/index';
 
 interface variablesObject {
-  a: number,
-  x: number,
-  y: number,
-  type: number
+  a: number;
+  x: number;
+  y: number;
+  type: number;
 }
 
 /**
@@ -26,20 +23,21 @@ function qn1302(options?: qnOptions): qnOutput {
   // options
   const defaultOptions = {
     type: 0,
-    qnCode: ''
-  }
+    qnCode: '',
+  };
   const optionsObject = { ...defaultOptions, ...options };
 
   // generate variables
   let type: number;
   let questions: string[], answers: string[], variables: variablesObject;
-  if (optionsObject.qnCode) { // qnCode provided
+  if (optionsObject.qnCode) {
+    // qnCode provided
     let restOfVariables: number[];
     [type, ...restOfVariables] = decode(optionsObject.qnCode) as [number, ...number[]];
     [variables, questions, answers] = variablesToQn(type, restOfVariables);
   } else {
     // generate qn type
-    type = (optionsObject.type === 0) ? getRandomInt(1, 4) : optionsObject.type;
+    type = optionsObject.type === 0 ? getRandomInt(1, 4) : optionsObject.type;
     // generate variables
     const [a, x, y] = getRandomInts(3, { unique: false, avoid: [0] });
     [variables, questions, answers] = variablesToQn(type, [a, x, y]);
@@ -49,29 +47,30 @@ function qn1302(options?: qnOptions): qnOutput {
     variables: variables,
     qnCode: encode(...variablesArray),
     questions: questions,
-    answers: answers
-  }
+    answers: answers,
+  };
 }
 
 interface qnOptions {
-  type?: number,
-  qnCode?: string
+  type?: number;
+  qnCode?: string;
 }
 interface qnOutput {
-  variables: variablesObject,
-  qnCode: string,
-  questions: string[],
-  answers: string[]
+  variables: variablesObject;
+  qnCode: string;
+  questions: string[];
+  answers: string[];
 }
 
-
 function variablesToQn(type: number, restOfVariables: number[]): [variablesObject, string[], string[]] {
-  const a = restOfVariables[0], x = restOfVariables[1], y = restOfVariables[2];
+  const a = restOfVariables[0],
+    x = restOfVariables[1],
+    y = restOfVariables[2];
   const variables: variablesObject = {
     a: a,
     x: x,
     y: y,
-    type: type
+    type: type,
   };
   // construct rhs of qn
   const z = new Complex(x, y);
@@ -82,7 +81,8 @@ function variablesToQn(type: number, restOfVariables: number[]): [variablesObjec
     secondComplexTerm = z.conjugate();
   } else if (type === 3) {
     secondComplexTerm = z.times(Complex.I);
-  } else { // type === 4
+  } else {
+    // type === 4
     secondComplexTerm = z.conjugate().times(Complex.I);
   }
   const rhs = z.times(z.conjugate()).plus(secondComplexTerm.times(a));

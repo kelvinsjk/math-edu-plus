@@ -1,9 +1,5 @@
 // import { Polynomial, getRandomFrac, Fraction } from 'math-edu';
-import {
-  getRandomInt,
-  Vector
-} from
-  'math-edu';
+import { getRandomInt, Vector } from 'math-edu';
 // '../../../../math-edu/src/index';
 
 /**
@@ -15,8 +11,8 @@ import {
  */
 function getRandomPerp(v: Vector, options?: randomPerpOptions): Vector {
   const defaultOptions = {
-    max: 9
-  }
+    max: 9,
+  };
   const optionsObject = { ...defaultOptions, ...options };
   const max = optionsObject.max;
   const maxVComponent = Math.max(Math.abs(v.x.valueOf()), Math.abs(v.y.valueOf()), Math.abs(v.z.valueOf()));
@@ -32,7 +28,12 @@ function getRandomPerp(v: Vector, options?: randomPerpOptions): Vector {
     let lambda = getRandomInt(-lambdaMax, lambdaMax);
     let mu = getRandomInt(-muMax, muMax);
     let vector = generator1.multiply(lambda).plus(generator2.multiply(mu));
-    while (vector.isZero() || Math.abs(vector.x.valueOf()) > max || Math.abs(vector.y.valueOf()) > max || Math.abs(vector.z.valueOf()) > max) {
+    while (
+      vector.isZero() ||
+      Math.abs(vector.x.valueOf()) > max ||
+      Math.abs(vector.y.valueOf()) > max ||
+      Math.abs(vector.z.valueOf()) > max
+    ) {
       lambda = getRandomInt(-lambdaMax, lambdaMax);
       mu = getRandomInt(-muMax, muMax);
       vector = generator1.multiply(lambda).plus(generator2.multiply(mu));
@@ -40,7 +41,7 @@ function getRandomPerp(v: Vector, options?: randomPerpOptions): Vector {
         vector.simplify(true);
       }
     }
-    return vector
+    return vector;
   } else if (!v.y.isEqual(0)) {
     const generator1 = new Vector(1, 0, 0);
     const generator2 = new Vector(0, v.z.negative(), v.y);
@@ -57,7 +58,7 @@ function getRandomPerp(v: Vector, options?: randomPerpOptions): Vector {
         vector.simplify(true);
       }
     }
-    return vector
+    return vector;
   } else if (!v.z.isEqual(0)) {
     let lambda = getRandomInt(-9, 9);
     let mu = getRandomInt(-9, 9);
@@ -67,16 +68,16 @@ function getRandomPerp(v: Vector, options?: randomPerpOptions): Vector {
     }
     const vector = new Vector(lambda, mu, 0);
     vector.simplify(true);
-    return vector
+    return vector;
   } else {
-    throw new Error('randomPerp ERROR: 0 vector not allowed')
+    throw new Error('randomPerp ERROR: 0 vector not allowed');
   }
 }
 /**
  * Options for generating perpendicular vectors
  */
 interface randomPerpOptions {
-  max?: number
+  max?: number;
 }
 
 export { getRandomPerp };

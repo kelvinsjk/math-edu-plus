@@ -1,6 +1,5 @@
 // import { Fraction } from 'math-edu'; TODO:
-import { Fraction, Term, Angle, SquareRoot, Trig, Polynomial, Expression } from
-  'math-edu';
+import { Fraction, Term, Angle, SquareRoot, Trig, Polynomial, Expression } from 'math-edu';
 // '../../../../math-edu/src/index';
 import SinFn from './sinFnClass';
 
@@ -12,7 +11,7 @@ export default class CosFn extends Term {
   a: Fraction;
   b: Fraction;
 
-  //// 
+  ////
   // constructor
   ////
   /**
@@ -26,8 +25,8 @@ export default class CosFn extends Term {
       a: 1,
       b: 0,
       variableAtom: 'x',
-      coeff: 1
-    }
+      coeff: 1,
+    };
     const optionsObject = { ...defaultOptions, ...options };
     const a = convertNumberToFraction(optionsObject.a);
     const b = convertNumberToFraction(optionsObject.b);
@@ -43,19 +42,19 @@ export default class CosFn extends Term {
     this.b = b;
   }
 
-  /** 
+  /**
    * subs in the value of x
-  */
+   */
   valueAt(x: number | Angle): SquareRoot {
     return Trig.cos(x);
   }
 
   /**
- * toNumberFunction
- * 
- * @return a javascript function that takes in a number type and output a number type.  
- * useful for numerical methods (eg Simpson's rule)
- */
+   * toNumberFunction
+   *
+   * @return a javascript function that takes in a number type and output a number type.
+   * useful for numerical methods (eg Simpson's rule)
+   */
   toNumberFunction(): (x: number) => number {
     return (x: number) => this.coeff.valueOf() * Math.cos(this.a.valueOf() * x + this.b.valueOf());
   }
@@ -68,8 +67,8 @@ export default class CosFn extends Term {
       a: this.a,
       b: this.b,
       variableAtom: this.variableAtom,
-      coeff: this.coeff.times(this.a).times(-1)
-    })
+      coeff: this.coeff.times(this.a).times(-1),
+    });
   }
 
   /**
@@ -80,8 +79,8 @@ export default class CosFn extends Term {
       a: this.a,
       b: this.b,
       variableAtom: this.variableAtom,
-      coeff: this.coeff.divide(this.a)
-    })
+      coeff: this.coeff.divide(this.a),
+    });
   }
 
   /**
@@ -94,12 +93,11 @@ export default class CosFn extends Term {
 }
 
 interface ExpOptions {
-  a?: number | Fraction,
-  b?: number | Fraction,
-  coeff?: number | Fraction,
-  variableAtom?: string
+  a?: number | Fraction;
+  b?: number | Fraction;
+  coeff?: number | Fraction;
+  variableAtom?: string;
 }
-
 
 // type MathTypes = number | Fraction | Exp;
 

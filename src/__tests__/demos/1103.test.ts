@@ -3,11 +3,29 @@ import { qn1103 } from '../../demos/11-vectors-i/1103';
 import { encode } from '../../fns/encode/encoders';
 
 const qCode1 = encode('a', 'a', 'a', 1, -1, 2, 2, 4, 1, -4, 2, 2, 1, 2);
-const { questions: [q1A, q1B, q1Ratio, q1C, q1Triangle], answers: [a1V, a1A], qnCode: qc1 } = qn1103({ qnCode: qCode1 });
-const { questions: [q2A, q2B, q2Ratio, q2C, q2Triangle], answers: [a2V, a2A], qnCode: qc2 } = qn1103({ qnCode: 'aab985E0910F11' });
-const { questions: [q3A, q3B, q3Ratio, q3C, q3Triangle], answers: [a3V, a3A], qnCode: qc3 } = qn1103({ qnCode: 'aba125AB18E551' });
-const { questions: [q4A, q4B, q4Ratio], answers: [a4V] } = qn1103({ qnCode: 'bbb7DD0G7C1B35' });
-const { questions: [q5A, q5B, q5Ratio], answers: [a5V] } = qn1103({ qnCode: 'baaH899084CC11' });
+const {
+  questions: [q1A, q1B, q1Ratio, q1C, q1Triangle],
+  answers: [a1V, a1A],
+  qnCode: qc1,
+} = qn1103({ qnCode: qCode1 });
+const {
+  questions: [q2A, q2B, q2Ratio, q2C, q2Triangle],
+  answers: [a2V, a2A],
+  qnCode: qc2,
+} = qn1103({ qnCode: 'aab985E0910F11' });
+const {
+  questions: [q3A, q3B, q3Ratio, q3C, q3Triangle],
+  answers: [a3V, a3A],
+  qnCode: qc3,
+} = qn1103({ qnCode: 'aba125AB18E551' });
+const {
+  questions: [q4A, q4B, q4Ratio],
+  answers: [a4V],
+} = qn1103({ qnCode: 'bbb7DD0G7C1B35' });
+const {
+  questions: [q5A, q5B, q5Ratio],
+  answers: [a5V],
+} = qn1103({ qnCode: 'baaH899084CC11' });
 
 test('1001', () => {
   expect(q1A).toBe('\\mathbf{i} - \\mathbf{j} + 2 \\mathbf{k}');
@@ -43,7 +61,6 @@ test('1001', () => {
   expect(q4Ratio).toBe('AB:AV = 3:8');
   expect(a4V).toBe('\\frac{1}{3} ( - 35 \\mathbf{i} - 36 \\mathbf{j} + 76 \\mathbf{k} )');
 
-
   for (let i = 0; i < 100; i++) {
     const { questions: q, answers: a, qnCode: qnCode } = qn1103();
     if (i < 30) {
@@ -61,4 +78,4 @@ test('1001', () => {
   expect(() => qn1103({ type1: 'b', type2: 'a', type3: 'b' })).not.toThrow();
   expect(() => qn1103({ type1: 'b', type2: 'b', type3: 'a' })).not.toThrow();
   expect(() => qn1103({ type1: 'b', type2: 'b', type3: 'b' })).not.toThrow();
-})
+});

@@ -9,5 +9,5 @@ const v2 = getRandomPerp(v1);
 
 test('getRandomInts', () => {
   expect(`${v1.dot(v2)}`).toBe('0');
-  expect(() => getRandomPerp(new Vector(0,0))).toThrow();
-})
+  expect(() => getRandomPerp(new Vector(0, 0))).toThrow();
+});

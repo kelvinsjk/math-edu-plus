@@ -14,23 +14,21 @@ const oneHalfClosed_Infinity = new Interval(oneHalf, Infinity, false);
 const oneHalfOpen_Infinity = new Interval(oneHalf, Infinity);
 const threeOpen_Infinity = new Interval(3);
 
-
-
 test('toString', () => {
   expect(`${real}`).toBe('\\left( -\\infty , \\infty \\right)');
   expect(`${real.toString({ rangeMode: true, variableAtom: 'y' })}`).toBe('y \\in \\mathbb{R}');
   expect(`${negativeInf_negativeTwoFifthOpen}`).toBe('\\left( -\\infty , - \\frac{2}{5} \\right)');
-  expect(`${negativeInf_negativeTwoFifthOpen.toString({rangeMode: true})}`).toBe('x < - \\frac{2}{5}');
-  expect(`${negativeInf_OneHalfOpen         }`).toBe('\\left( -\\infty , \\frac{1}{2} \\right)');
-  expect(`${negativeInf_OneHalfClosed       }`).toBe('\\left( -\\infty , \\frac{1}{2} \\right]');
-  expect(`${negativeInf_OneHalfClosed.toString({rangeMode: true})       }`).toBe('x \\leq \\frac{1}{2}');
-  expect(`${negativeTwoFifthOpen_ThreeOpen  }`).toBe('\\left( - \\frac{2}{5} , 3 \\right)');
+  expect(`${negativeInf_negativeTwoFifthOpen.toString({ rangeMode: true })}`).toBe('x < - \\frac{2}{5}');
+  expect(`${negativeInf_OneHalfOpen}`).toBe('\\left( -\\infty , \\frac{1}{2} \\right)');
+  expect(`${negativeInf_OneHalfClosed}`).toBe('\\left( -\\infty , \\frac{1}{2} \\right]');
+  expect(`${negativeInf_OneHalfClosed.toString({ rangeMode: true })}`).toBe('x \\leq \\frac{1}{2}');
+  expect(`${negativeTwoFifthOpen_ThreeOpen}`).toBe('\\left( - \\frac{2}{5} , 3 \\right)');
   expect(`${negativeTwoFifthOpen_ThreeClosed}`).toBe('\\left( - \\frac{2}{5} , 3 \\right]');
-  expect(`${negativeTwoFifthOpen_ThreeClosed.toString({rangeMode: true})}`).toBe('- \\frac{2}{5} < x \\leq 3');
+  expect(`${negativeTwoFifthOpen_ThreeClosed.toString({ rangeMode: true })}`).toBe('- \\frac{2}{5} < x \\leq 3');
   expect(`${negativeTwoFifthClosed_ThreeOpen}`).toBe('\\left[ - \\frac{2}{5} , 3 \\right)');
-  expect(`${oneHalfClosed_Infinity          }`).toBe('\\left[ \\frac{1}{2} , \\infty \\right)');
-  expect(`${oneHalfClosed_Infinity.toString({rangeMode: true})          }`).toBe('x \\geq \\frac{1}{2}');
-  expect(`${threeOpen_Infinity              }`).toBe('\\left( 3 , \\infty \\right)');
+  expect(`${oneHalfClosed_Infinity}`).toBe('\\left[ \\frac{1}{2} , \\infty \\right)');
+  expect(`${oneHalfClosed_Infinity.toString({ rangeMode: true })}`).toBe('x \\geq \\frac{1}{2}');
+  expect(`${threeOpen_Infinity}`).toBe('\\left( 3 , \\infty \\right)');
 
   expect(() => {
     new Interval(Infinity);
@@ -52,7 +50,7 @@ test('subsets', () => {
   expect(negativeInf_OneHalfClosed.contains(negativeTwoFifth)).toBe(true);
   expect(negativeInf_OneHalfClosed.contains(oneHalf)).toBe(true);
   expect(negativeInf_negativeTwoFifthOpen.contains(negativeTwoFifth)).toBe(false);
-  
+
   expect(negativeInf_negativeTwoFifthOpen.subsetEq(real)).toBe(true);
   expect(threeOpen_Infinity.subsetEq(real)).toBe(true);
   expect(threeOpen_Infinity.subsetEq(real)).toBe(true);
@@ -66,11 +64,19 @@ test('operations', () => {
   expect(`${real.intersect(real)}`).toBe('\\left( -\\infty , \\infty \\right)');
   expect(`${real.union(real)}`).toBe('\\left( -\\infty , \\infty \\right)');
 
-  expect(`${negativeInf_negativeTwoFifthOpen.intersect(negativeInf_OneHalfClosed)}`).toBe('\\left( -\\infty , - \\frac{2}{5} \\right)');
-  expect(`${negativeInf_negativeTwoFifthOpen.union(negativeInf_OneHalfClosed)}`).toBe('\\left( -\\infty , \\frac{1}{2} \\right]');
-  
-  expect(`${negativeInf_OneHalfOpen.intersect(negativeTwoFifthOpen_ThreeClosed)}`).toBe('\\left( - \\frac{2}{5} , \\frac{1}{2} \\right)');
-  expect(`${negativeTwoFifthOpen_ThreeClosed.intersect(negativeInf_OneHalfOpen)}`).toBe('\\left( - \\frac{2}{5} , \\frac{1}{2} \\right)');
+  expect(`${negativeInf_negativeTwoFifthOpen.intersect(negativeInf_OneHalfClosed)}`).toBe(
+    '\\left( -\\infty , - \\frac{2}{5} \\right)',
+  );
+  expect(`${negativeInf_negativeTwoFifthOpen.union(negativeInf_OneHalfClosed)}`).toBe(
+    '\\left( -\\infty , \\frac{1}{2} \\right]',
+  );
+
+  expect(`${negativeInf_OneHalfOpen.intersect(negativeTwoFifthOpen_ThreeClosed)}`).toBe(
+    '\\left( - \\frac{2}{5} , \\frac{1}{2} \\right)',
+  );
+  expect(`${negativeTwoFifthOpen_ThreeClosed.intersect(negativeInf_OneHalfOpen)}`).toBe(
+    '\\left( - \\frac{2}{5} , \\frac{1}{2} \\right)',
+  );
   expect(`${negativeInf_OneHalfOpen.union(negativeTwoFifthOpen_ThreeClosed)}`).toBe('\\left( -\\infty , 3 \\right]');
   expect(`${negativeTwoFifthOpen_ThreeClosed.union(negativeInf_OneHalfOpen)}`).toBe('\\left( -\\infty , 3 \\right]');
 
@@ -78,7 +84,7 @@ test('operations', () => {
   expect(negativeInf_OneHalfClosed.union(threeOpen_Infinity).length).toBe(2);
   expect(`${negativeInf_OneHalfClosed.union(threeOpen_Infinity)[0]}`).toBe('\\left( -\\infty , \\frac{1}{2} \\right]');
   expect(`${negativeInf_OneHalfClosed.union(threeOpen_Infinity)[1]}`).toBe('\\left( 3 , \\infty \\right)');
-  
+
   expect(`${negativeInf_OneHalfClosed.union(oneHalfClosed_Infinity)}`).toBe('\\left( -\\infty , \\infty \\right)');
   expect(`${negativeInf_OneHalfOpen.union(oneHalfClosed_Infinity)}`).toBe('\\left( -\\infty , \\infty \\right)');
   expect(`${negativeInf_OneHalfOpen.union(oneHalfOpen_Infinity)[0]}`).toBe('\\left( -\\infty , \\frac{1}{2} \\right)');
@@ -91,13 +97,15 @@ test('arithmetic', () => {
 
   expect(`${negativeInf_negativeTwoFifthOpen.plus(oneHalf)}`).toBe('\\left( -\\infty , \\frac{1}{10} \\right)');
   expect(`${negativeInf_negativeTwoFifthOpen.times(oneHalf)}`).toBe('\\left( -\\infty , - \\frac{1}{5} \\right)');
-  expect(`${negativeInf_negativeTwoFifthOpen.times(oneHalf.times(-1))}`).toBe('\\left( \\frac{1}{5} , \\infty \\right)');
+  expect(`${negativeInf_negativeTwoFifthOpen.times(oneHalf.times(-1))}`).toBe(
+    '\\left( \\frac{1}{5} , \\infty \\right)',
+  );
 
   expect(`${negativeTwoFifthOpen_ThreeOpen.plus(1)}`).toBe('\\left( \\frac{3}{5} , 4 \\right)');
   expect(`${negativeTwoFifthOpen_ThreeClosed.times(-1)}`).toBe('\\left[ -3 , \\frac{2}{5} \\right)');
   expect(`${negativeTwoFifthClosed_ThreeOpen.times(2)}`).toBe('\\left[ - \\frac{4}{5} , 6 \\right)');
 
-  const negativeOneClosed_negativeTwoFifthOpen = new Interval(-1, negativeTwoFifth, false)
+  const negativeOneClosed_negativeTwoFifthOpen = new Interval(-1, negativeTwoFifth, false);
 
   expect(`${negativeTwoFifthClosed_ThreeOpen.pow(2)}`).toBe('\\left[ 0 , 9 \\right)');
   expect(`${negativeTwoFifthClosed_ThreeOpen.pow(3)}`).toBe('\\left[ - \\frac{8}{125} , 27 \\right)');
@@ -129,18 +137,20 @@ test('arithmetic', () => {
 });
 
 test('array subsets', () => {
-
   expect(Interval.IntervalsSubsetEq(real, [threeOpen_Infinity, negativeTwoFifthClosed_ThreeOpen])).toBe(false);
   expect(Interval.IntervalsSubsetEq([threeOpen_Infinity, negativeTwoFifthClosed_ThreeOpen], real)).toBe(true);
-  expect(Interval.IntervalsSubsetEq(threeOpen_Infinity , real)).toBe(true);
+  expect(Interval.IntervalsSubsetEq(threeOpen_Infinity, real)).toBe(true);
 
-  const negativeOneClosed_negativeTwoFifthOpen = new Interval(-1, negativeTwoFifth, false)
+  const negativeOneClosed_negativeTwoFifthOpen = new Interval(-1, negativeTwoFifth, false);
   const negativeOneOne = new Interval(-1, 1, false);
   const oneInf = new Interval(1);
 
-
-  expect(Interval.IntervalsSubsetEq([threeOpen_Infinity, negativeOneClosed_negativeTwoFifthOpen], [negativeOneOne, oneInf] )).toBe(true);
-  expect(Interval.IntervalsSubsetEq([negativeOneOne, oneInf], [threeOpen_Infinity, negativeOneClosed_negativeTwoFifthOpen] )).toBe(false);
+  expect(
+    Interval.IntervalsSubsetEq([threeOpen_Infinity, negativeOneClosed_negativeTwoFifthOpen], [negativeOneOne, oneInf]),
+  ).toBe(true);
+  expect(
+    Interval.IntervalsSubsetEq([negativeOneOne, oneInf], [threeOpen_Infinity, negativeOneClosed_negativeTwoFifthOpen]),
+  ).toBe(false);
 
   expect(threeOpen_Infinity.subsetEq(real)).toBe(true);
   expect(threeOpen_Infinity.subsetEq(real)).toBe(true);
