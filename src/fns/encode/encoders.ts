@@ -58,7 +58,7 @@ function decode(str: string): (number | string)[] {
 
 function encodeChar(str: string): string{
   const charCode = str.charCodeAt(0);
-  if (isDigit(charCode) || isComparison(charCode) || isLetter(charCode)) {
+  if (isDigit(charCode) || isComparison(charCode) || isLowerCaseAlphabet(charCode)) {
     return str[0]
   }
   if (str[0] === "-") { // negative number
@@ -77,8 +77,8 @@ function isComparison(charCode: number): boolean{
   return (charCode < 63 && charCode > 59) || charCode === 33 || charCode === 91 || charCode === 93
 }
 
-function isLetter(charCode: number): boolean{
-  return (charCode < 91 && charCode > 64) || (charCode < 123 && charCode > 96)
+function isLowerCaseAlphabet(charCode: number): boolean{
+  return (charCode < 123 && charCode > 96)
 }
 
 export{ encode, decode }

@@ -3,7 +3,9 @@ import {
   getRandomFrac,
   Polynomial,
   Fraction,
-} from '../../../../math-edu/src/index';
+} from
+  'math-edu';
+// '../../../../math-edu/src/index';
 
 
 /**

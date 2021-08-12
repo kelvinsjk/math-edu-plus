@@ -57,7 +57,7 @@ test('0101', () => {
   expect(q6).toBe("\\frac{ - x^2 + 2 x }{ x^2 + x + 1 } < -1");
   expect(a6[0]).toBe("x < - \\frac{1}{3}");
 
-  for (let i = 0; i < 30; i++){
+  for (let i = 0; i < 35; i++){
     const { questions: [q], qnCode: qnCode } = qn0101();
     const { questions: [q2] } = qn0101({ qnCode: qnCode });
     expect(q).toBe(q2);

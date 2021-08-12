@@ -1,5 +1,7 @@
   // import { Fraction, Expression } from 'math-edu'; TODO:
-import { Fraction, Expression, Term, Polynomial } from '../../../math-edu/src/index';
+import { Fraction, Expression, Term, Polynomial } from
+  'math-edu';
+// '../../../../math-edu/src/index';
 import Interval from './intervalClass';
 
 /**

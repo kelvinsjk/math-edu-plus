@@ -1,6 +1,6 @@
 import { encode, decode } from '../../fns/encode/encoders';
-import Interval from '../../classes/intervalClass';
-import { BasicFunction, FunctionChain } from '../../classes/functionClasses';
+import Interval from '../../classes/functions/intervalClass';
+import { BasicFunction, FunctionChain } from '../../classes/functions/functionClasses';
 
 //import {
 //  getRandomFrac, TODO: update

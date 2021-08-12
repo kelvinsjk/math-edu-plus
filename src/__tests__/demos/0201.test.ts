@@ -18,9 +18,9 @@ import { encode } from '../../fns/encode/encoders';
 //const qCode6 = '6<111A3A';
 //const { questions: [q6], answers: a6 } = qn0101({ qnCode: qCode6 });
 
-const { questions: questions, answers: answers } = qn0201();
-console.log(questions);
-console.log(answers);
+//const { questions: questions, answers: answers } = qn0201();
+//console.log(questions);
+//console.log(answers);
 
 test('0201', () => {
   expect(true).toBe(true);

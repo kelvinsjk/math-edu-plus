@@ -1,16 +1,16 @@
 import { getRandomInts } from '../../fns/random/generateMultiple';
 import { encode, decode } from '../../fns/encode/encoders';
 import { getNiceQuadratic } from '../../fns/random/generateNice';
-//import {
-//  getRandomFrac,
-//  //getRandomQuadratic, TODO: update
-//  getRandomInt, Polynomial, RationalFunction, Fraction, getRandomLinear
-//} from 'math-edu';
 import {
   getRandomFrac,
   getRandomQuadratic,
   getRandomInt, Polynomial, RationalFunction, Fraction, getRandomLinear
-} from  '../../../../math-edu/src/index';
+} from 'math-edu';
+//import {
+//  getRandomFrac,
+//  getRandomQuadratic,
+//  getRandomInt, Polynomial, RationalFunction, Fraction, getRandomLinear
+//} from  '../../../../math-edu/src/index';
 
 
 /**

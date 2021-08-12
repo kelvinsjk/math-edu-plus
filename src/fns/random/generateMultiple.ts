@@ -1,7 +1,9 @@
 // import { getRandomInt } from 'math-edu';
 import {
   getRandomInt,
-} from '../../../../math-edu/src/index';
+} from
+  'math-edu';
+// '../../../../math-edu/src/index';
 
 // get n random integers between lb and up
 /**
@@ -20,17 +22,20 @@ function getRandomInts(n: number, options?: randomIntsOptions): number[] {
   const max = Math.floor(optionsObject.max);
   const min = Math.ceil(optionsObject.min);
   const unique = optionsObject.unique;
-  const avoid = optionsObject.avoid;
+  const avoid = optionsObject.avoid as number[];
   if (!Number.isInteger(n) || n < 1) {
-    throw 'n must be a positive integer';
+    throw new Error('getRandomInts ERROR: n must be a positive integer');
   }
-  if (unique && max - min + 1 - avoid.length < n) {
-    throw 'less numbers available then required';
+  if ((unique && max - min + 1 - avoid.length < n) || min > max ) {
+    throw new Error('getRandomInts ERROR: less numbers available then required');
   }
-  const integers: number[] = avoid;
+  const integers: number[] = [];
   for (let i = 0; i < n; i++) {
-    const newInt = getRandomInt(-9, 9, { avoid: unique ? integers : [] });
+    const newInt = getRandomInt(min, max, { avoid: avoid });
     integers.push(newInt);
+    if (unique) {
+      avoid.push(newInt);
+    }
   }
   return integers
 }
