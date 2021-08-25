@@ -1,6 +1,6 @@
-import { qn0605 } from '../../demos/06-differentiation/0605';
+import { qn0605 } from '../../../demos/06-differentiation/0605';
 
-import { encode } from '../../fns/encode/encoders';
+import { encode } from '../../../fns/encode/encoders';
 
 const qCode1 = encode('a', 'a', 3);
 const {

@@ -1,6 +1,6 @@
-import { qn1001 } from '../../demos/10-de/1001';
+import { qn1001 } from '../../../demos/10-de/1001';
 
-import { encode } from '../../fns/encode/encoders';
+import { encode } from '../../../fns/encode/encoders';
 
 const qCode1 = encode(1, 'a', 2, 3, 4, 'D');
 const {

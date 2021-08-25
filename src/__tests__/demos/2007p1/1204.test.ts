@@ -1,6 +1,6 @@
-import { qn1204 } from '../../demos/12-vectors-ii/1204';
+import { qn1204 } from '../../../demos/12-vectors-ii/1204';
 
-import { encode } from '../../fns/encode/encoders';
+import { encode } from '../../../fns/encode/encoders';
 
 const qCode1 = encode(1, 1, 2, 4, -2, 3, 1, 3, -1, 2, -1, 2);
 const { questions: q1, answers: a1, qnCode: qc1 } = qn1204({ qnCode: qCode1 });

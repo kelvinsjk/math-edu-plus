@@ -1,6 +1,7 @@
 // import { Fraction } from 'math-edu'; TODO:
-import { Fraction, Term, Angle, SquareRoot, Trig, Polynomial, Expression } from 'math-edu';
-// '../../../../math-edu/src/index';
+import { Fraction, Term, Angle, SquareRoot, Trig, Polynomial, Expression } 
+// from 'math-edu';
+from '../../../../math-edu/src/index';
 import SinFn from './sinFnClass';
 
 export default class CosFn extends Term {
@@ -15,12 +16,12 @@ export default class CosFn extends Term {
   // constructor
   ////
   /**
-   * Creates a new expFn instance
+   * Creates a new cosFn instance
    *
-   * @options defaults to `a: 1, b: 0, variableAtom: 'x', coeff: 1`
+   * @param options defaults to `a: 1, b: 0, variableAtom: 'x', coeff: 1`
    *
    */
-  constructor(options?: ExpOptions) {
+  constructor(options?: TrigOptions) {
     const defaultOptions = {
       a: 1,
       b: 0,
@@ -32,7 +33,7 @@ export default class CosFn extends Term {
     const b = convertNumberToFraction(optionsObject.b);
     const coeff = convertNumberToFraction(optionsObject.coeff);
     if (a.isEqual(0)) {
-      throw new Error('expFn ERROR: a must be non-zero');
+      throw new Error('cosFn ERROR: a must be non-zero');
     }
     const axPLUSb = new Polynomial([a, b], { variableAtom: optionsObject.variableAtom });
     const axPLUSbString = `${axPLUSb}`.length === 1 || `${axPLUSb}` === '\\theta' ? `${axPLUSb}` : `( ${axPLUSb} )`;
@@ -44,9 +45,15 @@ export default class CosFn extends Term {
 
   /**
    * subs in the value of x
+   * 
+   * WARNING: only supported if final angle is a special angle
    */
   valueAt(x: number | Angle): SquareRoot {
-    return Trig.cos(x);
+    if (x instanceof Angle) {
+      x = x.degrees;
+    }
+    const angle = this.a.times(x).plus(this.b);
+    return Trig.cos(angle.valueOf()).times(this.coeff);
   }
 
   /**
@@ -92,11 +99,11 @@ export default class CosFn extends Term {
   }
 }
 
-interface ExpOptions {
-  a?: number | Fraction;
-  b?: number | Fraction;
-  coeff?: number | Fraction;
-  variableAtom?: string;
+interface TrigOptions {
+  a?: number | Fraction,
+  b?: number | Fraction,
+  coeff?: number | Fraction,
+  variableAtom?: string,
 }
 
 // type MathTypes = number | Fraction | Exp;

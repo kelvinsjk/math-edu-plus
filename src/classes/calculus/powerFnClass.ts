@@ -1,6 +1,7 @@
 // import { Fraction } from 'math-edu'; TODO:
-import { Fraction, Term, Polynomial, Expression } from 'math-edu';
-// '../../../../math-edu/src/index';
+import { Fraction, Term, Polynomial, Expression }
+// from 'math-edu';
+from '../../../../math-edu/src/index';
 
 export default class PowerFn extends Term {
   /**
@@ -91,10 +92,10 @@ export default class PowerFn extends Term {
     if (this.b.isEqual(0)) {
       // ( a(kx) )^n
       const newCoeff = this.coeff.times(x.coeff).pow(this.n.num);
-      return new Term(newCoeff, `\\left( ${x.variable} \\right)^{ ${this.n.num} }`);
+      return this.n.isEqual(1) ? new Term(newCoeff, `${x.variable}`) : new Term(newCoeff, `\\left( ${x.variable} \\right)^{ ${this.n.num} }`);
     } else {
       const akxPLUSb = new Expression(new Term(this.a.times(x.coeff), x.variable), this.b);
-      return new Term(1, `\\left( ${akxPLUSb} \\right)^{ ${this.n.num} }`);
+      return this.n.isEqual(1) ? new Term(1, `${akxPLUSb}`) : new Term(1, `\\left( ${akxPLUSb} \\right)^{ ${this.n.num} }`);
     }
   }
   /**

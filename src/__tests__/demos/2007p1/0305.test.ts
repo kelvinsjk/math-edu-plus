@@ -1,6 +1,6 @@
-import { qn0305 } from '../../demos/03-graphs/0305';
+import { qn0305 } from '../../../demos/03-graphs/0305';
 
-import { encode } from '../../fns/encode/encoders';
+import { encode } from '../../../fns/encode/encoders';
 
 const qCode1 = encode(1, 2, 3, 2);
 const {

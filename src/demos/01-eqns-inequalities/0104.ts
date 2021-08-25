@@ -1,13 +1,11 @@
 import { encode, decode } from '../../fns/encode/encoders';
 
-//import {
-//  getRandomFrac, TODO: update
-//  getRandomInt,
-//  Fraction, getRandomLinear
-//} from 'math-edu';
 import { getRandomInt, Expression } from '../../../../math-edu/src/index';
 
-import { ExpFn, PowerFn, bisection, simpsons, integrateByParts } from '../../index';
+import {
+  // getRandomInt, Expression,
+  ExpFn, PowerFn, bisection, simpsons, integrateByParts
+} from '../../index';
 
 /**
  * generate qn1004: equations and inequalities
@@ -68,7 +66,7 @@ function variablesToQn(n: number): [variablesObject, string[], string[]] {
   // (a) pi int_4^5 e^2x - 2n x + n^2 x^2
   const n2x2 = new PowerFn({ coeff: n * n, n: 2 });
   const exp2xIntegral = new ExpFn({ a: 2 }).definiteIntegral(4, 5);
-  const nx_exIntegral = integrateByParts(nx, ex, { lower: 4, upper: 5 }).multiply(2);
+  const nx_exIntegral = integrateByParts(nx, ex, [4, 5]).multiply(2);
   const n2x2Integral = n2x2.definiteIntegral(4, 5);
 
   const definite = exp2xIntegral.subtract(nx_exIntegral).add(n2x2Integral);

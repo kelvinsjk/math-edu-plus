@@ -1,6 +1,6 @@
-import { qn0104 } from '../../demos/01-eqns-inequalities/0104';
+import { qn0104 } from '../../../demos/01-eqns-inequalities/0104';
 
-import { encode } from '../../fns/encode/encoders';
+import { encode } from '../../../fns/encode/encoders';
 
 //const qCode1 = encode(1, 1, 2, 4, -2, 3, 1, 3, -1, 2, -1, 2);
 const { questions: q1, answers: a1, qnCode: qc1 } = qn0104({ qnCode: '3' });

@@ -1,6 +1,6 @@
-import { qn1302 } from '../../demos/13-complex/1302';
+import { qn1302 } from '../../../demos/13-complex/1302';
 
-import { encode } from '../../fns/encode/encoders';
+import { encode } from '../../../fns/encode/encoders';
 
 const qCode1 = encode(1, 2, -1, 2);
 const {

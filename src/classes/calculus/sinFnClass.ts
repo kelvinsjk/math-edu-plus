@@ -1,6 +1,7 @@
 // import { Fraction } from 'math-edu'; TODO:
-import { Fraction, Term, Angle, SquareRoot, Trig, Polynomial, Expression } from 'math-edu';
-// '../../../../math-edu/src/index';
+import { Fraction, Term, Angle, SquareRoot, Trig, Polynomial, Expression }
+// from 'math-edu';
+from '../../../../math-edu/src/index';
 import CosFn from './cosFnClass';
 
 export default class SinFn extends Term {
@@ -15,7 +16,7 @@ export default class SinFn extends Term {
   // constructor
   ////
   /**
-   * Creates a new expFn instance
+   * Creates a new sinFn instance
    *
    * @options defaults to `a: 1, b: 0, variableAtom: 'x', coeff: 1`
    *
@@ -32,7 +33,7 @@ export default class SinFn extends Term {
     const b = convertNumberToFraction(optionsObject.b);
     const coeff = convertNumberToFraction(optionsObject.coeff);
     if (a.isEqual(0)) {
-      throw new Error('expFn ERROR: a must be non-zero');
+      throw new Error('sinFn ERROR: a must be non-zero');
     }
     const axPLUSb = new Polynomial([a, b], { variableAtom: optionsObject.variableAtom });
     const axPLUSbString = `${axPLUSb}`.length === 1 || `${axPLUSb}` === '\\theta' ? `${axPLUSb}` : `( ${axPLUSb} )`;
@@ -44,9 +45,15 @@ export default class SinFn extends Term {
 
   /**
    * subs in the value of x
+   * 
+   * WARNING: only supported if if final angle is a special angle
    */
   valueAt(x: number | Angle): SquareRoot {
-    return Trig.sin(x);
+    if (x instanceof Angle) {
+      x = x.degrees;
+    }
+    const angle = this.a.times(x).plus(this.b);
+    return Trig.sin(angle.valueOf()).times(this.coeff);
   }
 
   /**

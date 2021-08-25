@@ -1,6 +1,6 @@
-import { qn0201 } from '../../demos/02-functions/0201';
+import { qn0201 } from '../../../demos/02-functions/0201';
 
-import { encode } from '../../fns/encode/encoders';
+import { encode } from '../../../fns/encode/encoders';
 
 //const qCode1 = encode(1, '>', -1, -2, 7, 1, -3, 1, 1, 0);
 //const { questions: [q1], answers: a1, qnCode: qc1 } = qn0101({ qnCode: qCode1 });

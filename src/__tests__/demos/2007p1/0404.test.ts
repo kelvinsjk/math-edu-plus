@@ -1,6 +1,6 @@
-import { qn0404 } from '../../demos/04-apgp/0404';
+import { qn0404 } from '../../../demos/04-apgp/0404';
 
-import { encode } from '../../fns/encode/encoders';
+import { encode } from '../../../fns/encode/encoders';
 
 const qCode1 = encode(1, 3, 2, 4);
 const {

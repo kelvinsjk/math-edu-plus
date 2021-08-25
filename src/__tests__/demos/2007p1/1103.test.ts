@@ -1,6 +1,6 @@
-import { qn1103 } from '../../demos/11-vectors-i/1103';
+import { qn1103 } from '../../../demos/11-vectors-i/1103';
 
-import { encode } from '../../fns/encode/encoders';
+import { encode } from '../../../fns/encode/encoders';
 
 const qCode1 = encode('a', 'a', 'a', 1, -1, 2, 2, 4, 1, -4, 2, 2, 1, 2);
 const {

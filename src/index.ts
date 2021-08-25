@@ -48,8 +48,9 @@ import {
   compose,
   canCompose,
 } from './classes/functions/functionClasses';
-import { ExpFn, PowerFn, CosFn, SinFn } from './classes/calculus/index';
+import { ExpFn, LnFn, PowerFn, CosFn, SinFn } from './classes/calculus/index';
 import integrateByParts from './fns/calculus/integrateByParts';
+import { integrateCosSquare, integrateSinSquare, integrateSinCos, integrateCosSin, integrateCosCos, integrateSinSin } from './fns/calculus/trig';
 import { bisection, simpsons, cramers, determinant } from './fns/numerical/index';
 import { getRandomInts } from './fns/random/generateMultiple';
 import { getNiceQuadratic } from './fns/random/generateNice';
@@ -59,47 +60,27 @@ import { encode, decode } from './fns/encode/encoders';
 
 export {
   Fraction,
-  NthRoot,
-  SquareRoot,
-  Term,
-  Expression,
-  Polynomial,
+  NthRoot, SquareRoot,
+  Term, Expression, Polynomial,
   Angle,
   Trig,
-  Exp,
-  Ln,
+  Exp, Ln,
   Complex,
-  Vector,
-  Line,
-  Plane,
-  gcd,
-  factorize,
+  Vector, Line, Plane,
+  gcd, factorize,
   solveQuadratic,
-  getRandomInt,
-  getRandomFrac,
-  getRandomLinear,
-  getRandomQuadratic,
-  getRandomVec,
+  getRandomInt, getRandomFrac, getRandomLinear, getRandomQuadratic, getRandomVec,
   RationalFunction,
   //// PLUS
   Interval,
-  BasicFunction,
-  GeneralFunction,
-  FunctionChain,
-  compose,
-  canCompose,
+  BasicFunction, GeneralFunction, FunctionChain,
+  compose, canCompose,
   getRandomInts,
   getRandomPerp,
   getNiceQuadratic,
-  ExpFn,
-  PowerFn,
-  SinFn,
-  CosFn,
-  integrateByParts,
-  simpsons,
-  bisection,
-  cramers,
-  determinant,
-  encode,
-  decode,
+  ExpFn, LnFn, PowerFn, SinFn, CosFn,
+  integrateByParts, integrateCosSquare, integrateSinSquare, integrateSinCos, integrateCosSin, integrateCosCos, integrateSinSin,
+  simpsons, bisection,
+  cramers, determinant,
+  encode, decode,
 };

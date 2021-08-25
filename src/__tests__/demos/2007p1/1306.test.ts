@@ -1,6 +1,6 @@
-import { qn1306 } from '../../demos/13-complex/1306';
+import { qn1306 } from '../../../demos/13-complex/1306';
 
-import { encode } from '../../fns/encode/encoders';
+import { encode } from '../../../fns/encode/encoders';
 
 const qCode1 = encode(1, 2, 1, 6, 1);
 const { questions: q1, answers: a1, qnCode: qc1 } = qn1306({ qnCode: qCode1 });
