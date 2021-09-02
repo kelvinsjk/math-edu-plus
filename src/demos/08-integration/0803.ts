@@ -1,7 +1,7 @@
 import { getRandomInt, Term, Fraction } from
   // 'math-edu';
   '../../../../math-edu/src/index';
-import { encode, decode, integrateCosSquare, integrateSinSquare, integrateSinCos } from '../../index'
+import { encode, decode, integrate } from '../../index'
 //import { ExpFn, PowerFn, bisection, simpsons, integrateByParts, encode, decode, getRandomInt, Expression } from 'math-edu-plus';
 
 interface VariablesObject {
@@ -86,14 +86,14 @@ function variablesToQn(variables: VariablesObject | number, subtype1?: string): 
   if (type === 1) {
     integral1 = subtype === 'a' ? sin2Integral : cos2Integral;
     integral2 = subtype === 'a' ? cos2Integral : sin2Integral;
-    const cos2Answer = `${integrateCosSquare({ a, limits: [0, b.times(180).valueOf()] })}`;
-    const sin2Answer = `${integrateSinSquare({ a, limits: [0, b.times(180).valueOf()] })}`;
+    const cos2Answer = `${integrate.cosSquare({ a, limits: [0, b.times(180).valueOf()] })}`;
+    const sin2Answer = `${integrate.sinSquare({ a, limits: [0, b.times(180).valueOf()] })}`;
     ans1 = subtype === 'a' ? sin2Answer : cos2Answer;
     ans2 = subtype === 'a' ? cos2Answer : sin2Answer;
   } else { // type === 2
     integral1 = sinCosIntegral;
     integral2 = squareIntegral;
-    const integralAns = integrateSinCos({ a, limits: [0, b.times(180).valueOf()] });
+    const integralAns = integrate.sinCos({ a, limits: [0, b.times(180).valueOf()] });
     ans1 = `${integralAns}`;
     ans2 = subtype === 'a' ? `${integralAns.multiply(2).add(bPi)}` : `${integralAns.multiply(-2).add(bPi)}`;
   }

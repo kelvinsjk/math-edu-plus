@@ -1,18 +1,4 @@
-//import
-//{
-//  Fraction,
-//  Term,
-//  NthRoot,
-//  SquareRoot,
-//  Expression,
-//  Polynomial,
-//  gcd,
-//  getRandomInt,
-//  getRandomFrac,
-//  getRandomLinear,
-//  getRandomQuadratic,
-//  RationalFunction
-//} from 'math-edu';
+
 import {
   Fraction,
   NthRoot,
@@ -37,6 +23,12 @@ import {
   getRandomQuadratic,
   getRandomVec,
   RationalFunction,
+  ExpFn,
+  LnFn,
+  PowerFn,
+  CosFn,
+  SinFn,
+  integrate,
 } from 'math-edu';
 //} from '../../math-edu/src/index';
 
@@ -48,9 +40,8 @@ import {
   compose,
   canCompose,
 } from './classes/functions/functionClasses';
-import { ExpFn, LnFn, PowerFn, CosFn, SinFn } from './classes/calculus/index';
-import integrateByParts from './fns/calculus/integrateByParts';
-import { integrateCosSquare, integrateSinSquare, integrateSinCos, integrateCosSin, integrateCosCos, integrateSinSin } from './fns/calculus/trig';
+import Normal from './classes/stats/normal';
+import { binomPdf, binomCdf, binomCdfRange, normCdf, invNorm, zTest, numberWithCommas } from './fns/stats/index';
 import { bisection, simpsons, cramers, determinant } from './fns/numerical/index';
 import { getRandomInts } from './fns/random/generateMultiple';
 import { getNiceQuadratic } from './fns/random/generateNice';
@@ -71,6 +62,8 @@ export {
   solveQuadratic,
   getRandomInt, getRandomFrac, getRandomLinear, getRandomQuadratic, getRandomVec,
   RationalFunction,
+  ExpFn, LnFn, PowerFn, SinFn, CosFn,
+  integrate,
   //// PLUS
   Interval,
   BasicFunction, GeneralFunction, FunctionChain,
@@ -78,9 +71,8 @@ export {
   getRandomInts,
   getRandomPerp,
   getNiceQuadratic,
-  ExpFn, LnFn, PowerFn, SinFn, CosFn,
-  integrateByParts, integrateCosSquare, integrateSinSquare, integrateSinCos, integrateCosSin, integrateCosCos, integrateSinSin,
   simpsons, bisection,
   cramers, determinant,
+  Normal, binomPdf, binomCdf, binomCdfRange, normCdf, invNorm, zTest, numberWithCommas,
   encode, decode,
 };

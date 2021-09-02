@@ -1,7 +1,7 @@
-import { getRandomInt, Term, Fraction } from
-  // 'math-edu';
-  '../../../../math-edu/src/index';
-import { encode, decode, integrateByParts, CosFn, SinFn, ExpFn, LnFn, simpsons, PowerFn } from '../../index'
+//import { getRandomInt, Term, Fraction } from
+//  // 'math-edu';
+//  '../../../../math-edu/src/index';
+import { getRandomInt, Term, Fraction, encode, decode, integrate, CosFn, SinFn, ExpFn, LnFn, simpsons, PowerFn } from '../../index'
 //import { ExpFn, PowerFn, bisection, simpsons, integrateByParts, encode, decode, getRandomInt, Expression } from 'math-edu-plus';
 
 interface VariablesObject {
@@ -84,7 +84,7 @@ function variablesToQn(variables: VariablesObject | number): [VariablesObject, Q
     const x2 = new PowerFn({ n: 2 });
     const sinX = new SinFn();
     const cosX = new CosFn();
-    const area = integrateByParts(x2, type === 1 ? sinX : cosX, [0, type === 1 ? 90 : 60]);
+    const area = integrate.byParts(x2, type === 1 ? sinX : cosX, [0, type === 1 ? 90 : 60]);
     ansA = `${area.multiply(new Fraction(1, a))}`;
     ansB = simpsons((x) => Math.PI*Math.pow(a * x, 4) * Math.pow(type === 1 ? Math.sin(a * x) : Math.cos(a * x), 2), 0, Math.PI / a / (type === 1 ? 2 : 3)).toFixed(3);
   } else if (type===3) { 
@@ -100,7 +100,7 @@ function variablesToQn(variables: VariablesObject | number): [VariablesObject, Q
     // integral of a^3 x^2 e^ax is invariant so we just find integration of x^2 e^x and scale by 1/a
     const x2 = new PowerFn({ n: 2 });
     const eX = new ExpFn();
-    const area = integrateByParts(x2, eX, [0, 1]);
+    const area = integrate.byParts(x2, eX, [0, 1]);
     ansA = `${area.multiply(new Fraction(1, a))}`;
     ansB = simpsons((x) => Math.PI *Math.pow(a * x, 4) * Math.exp(2*a*x), 0, 1/a).toFixed(3);
   } else { // type === 4
@@ -116,7 +116,7 @@ function variablesToQn(variables: VariablesObject | number): [VariablesObject, Q
     // integral of a (ln ax)^2 is invariant so we just find integration of (ln x)^2 and scale by 1/a
     const one = new PowerFn({ n: 0 });
     const lnX = new LnFn({n:2});
-    const area = integrateByParts(lnX, one, [1, 2]);
+    const area = integrate.byParts(lnX, one, [1, 2]);
     ansA = `${area.multiply(new Fraction(1, a))}`;
     ansB = simpsons((x) => Math.PI *Math.pow(Math.log(a*x), 4), 1/a, 2 / a).toFixed(3);
   }

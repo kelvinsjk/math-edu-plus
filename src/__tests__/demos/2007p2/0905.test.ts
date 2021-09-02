@@ -10,8 +10,6 @@ const { questions: q4, answers: a4 } = qn0905({ qnCode: "43" });
 //console.log(q1);
 //console.log(a1);
 //console.log(qc1);
-console.log(q4);
-console.log(a4);
 
 //const { questions: questions, answers: answers, qnCode } = qn0905();
 //console.log(questions);
