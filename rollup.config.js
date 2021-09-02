@@ -34,7 +34,7 @@ export default [
       terser() // minify
 
     ],
-    external: ['math-edu'],
+    external: ['math-edu', 'simple-statistics', 'math-erfinv'],
     output: [
       { file: pkg.main, format: 'cjs' },
       { file: pkg.module, format: 'es' }

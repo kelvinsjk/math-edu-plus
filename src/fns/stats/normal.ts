@@ -1,7 +1,5 @@
 import { errorFunction, zScore } from 'simple-statistics';
-//import inverseErrorFunction = require('math-erfinv');
-import { default as inverseErrorFunction } from 'math-erfinv';
-//import probit from '../../../node_modules/simple-statistics/src/probit.js';
+import inverseErrorFunction from 'math-erfinv';
 
 /**
  * normCdf(mu, sigma, limits)
