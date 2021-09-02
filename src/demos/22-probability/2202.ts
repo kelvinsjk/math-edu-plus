@@ -5,18 +5,18 @@ import { getRandomInt, Fraction } from 'math-edu';
 import { encode, decode } from '../../index';
 
 interface VariablesObject {
-  type: number,
-  k: number,
-  atLeast: number,
-  iiiDays: number,
-  ivDays: number,
+  type: number;
+  k: number;
+  atLeast: number;
+  iiiDays: number;
+  ivDays: number;
 }
 
 /**
  * generate qn2202: probability
  * @param options `{qnCode: string}
  */
-function qn2202(options?: { qnCode?: string, type?: number }): qnOutput {
+function qn2202(options?: { qnCode?: string; type?: number }): qnOutput {
   // options
   const defaultOptions = {
     qnCode: '',
@@ -63,31 +63,34 @@ function qn2202(options?: { qnCode?: string, type?: number }): qnOutput {
 }
 
 interface qnOutput {
-  variables: VariablesObject,
-  qnCode: string,
-  questions: QnContainer,
-  answers: AnswerContainer
+  variables: VariablesObject;
+  qnCode: string;
+  questions: QnContainer;
+  answers: AnswerContainer;
 }
 interface QnContainer {
-  p: string,
-  probabilityOfRain: string,
-  probabilityBulletOne: string,
-  probabilityBulletTwo: string,
-  atLeast: string,
-  iiiOneOrTwo: string
-  ivOneOrTwo: string
+  p: string;
+  probabilityOfRain: string;
+  probabilityBulletOne: string;
+  probabilityBulletTwo: string;
+  atLeast: string;
+  iiiOneOrTwo: string;
+  ivOneOrTwo: string;
 }
 interface AnswerContainer {
-  ansB: string,
-  ansC: string,
-  ansD: string,
+  ansB: string;
+  ansC: string;
+  ansD: string;
 }
 
 function variablesToQn(variables: VariablesObject): [VariablesObject, QnContainer, AnswerContainer] {
   const { type, k, atLeast, iiiDays, ivDays } = variables;
 
   const oneDayArray = ['one day', 'two days'];
-  let p: string, probabilityOfRain = '', probabilityBulletOne: string, probabilityBulletTwo: string;
+  let p: string,
+    probabilityOfRain = '',
+    probabilityBulletOne: string,
+    probabilityBulletTwo: string;
   let ansB: string, ansC: string, ansD: string;
   if (type === 1 || type === 2) {
     const prob = new Fraction(1, k);
@@ -95,7 +98,8 @@ function variablesToQn(variables: VariablesObject): [VariablesObject, QnContaine
     probabilityOfRain = ' the probability of rain is';
     if (type === 1) {
       probabilityBulletOne = 'twice the probability of rain the previous day if it rained the previous day,';
-      probabilityBulletTwo = 'the same as the probability of rain the previous day if it did not rain the previous day.';
+      probabilityBulletTwo =
+        'the same as the probability of rain the previous day if it did not rain the previous day.';
       // answers
       const prob2 = prob.times(2);
       const prob3 = prob.times(4);
@@ -113,15 +117,16 @@ function variablesToQn(variables: VariablesObject): [VariablesObject, QnContaine
       const DDD = q.times(q).times(q);
       const exactlyOnce = DDR.plus(DRD).plus(RDD);
       const exactlyTwice = RRD.plus(RDR).plus(DRR);
-      if (atLeast === 0) { // at most
+      if (atLeast === 0) {
+        // at most
         ansC = iiiDays === 1 ? `${exactlyOnce.plus(DDD)}.` : `${exactlyOnce.plus(exactlyTwice).plus(DDD)}.`;
-      } else { // at least 
+      } else {
+        // at least
         ansC = iiiDays === 1 ? `${exactlyOnce.plus(exactlyTwice).plus(RRR)}.` : `${exactlyTwice.plus(RRR)}.`;
       }
-      ansD = ivDays === 1 ?
-        `${DDR.divide(exactlyOnce)}.`
-        : `${RDR.plus(DRR).divide(exactlyTwice)}.`;
-    } else { // type === 2
+      ansD = ivDays === 1 ? `${DDR.divide(exactlyOnce)}.` : `${RDR.plus(DRR).divide(exactlyTwice)}.`;
+    } else {
+      // type === 2
       const pOverTwo = prob.divide(2);
       probabilityBulletOne = `${pOverTwo} higher than the probability of rain the previous day if it rained the previous day,`;
       probabilityBulletTwo = 'half the probability of rain the previous day if it did not rain the previous day.';
@@ -152,20 +157,23 @@ function variablesToQn(variables: VariablesObject): [VariablesObject, QnContaine
 
       const exactlyOnce = RDD.plus(DRD).plus(DDR);
       const exactlyTwice = RRD.plus(RDR).plus(DRR);
-      if (atLeast === 0) { // at most
+      if (atLeast === 0) {
+        // at most
         ansC = iiiDays === 1 ? `${exactlyOnce.plus(DDD)}.` : `${exactlyOnce.plus(exactlyTwice).plus(DDD)}.`;
-      } else { // at least 
+      } else {
+        // at least
         ansC = iiiDays === 1 ? `${exactlyOnce.plus(exactlyTwice).plus(RRR)}.` : `${exactlyTwice.plus(RRR)}.`;
       }
-      ansD = ivDays === 1 ?
-        `${DDR.divide(exactlyOnce)}.`
-        : `${RDR.plus(DRR).divide(exactlyTwice)}.`;
+      ansD = ivDays === 1 ? `${DDR.divide(exactlyOnce)}.` : `${RDR.plus(DRR).divide(exactlyTwice)}.`;
     }
-  } else { // type === 3
+  } else {
+    // type === 3
     p = `0.${k}.`;
     probabilityBulletOne = `the probability that it rains, given that it rained the previous day, is 0.${k + 1},`;
     const q = 10 - k;
-    probabilityBulletTwo = `the probability that it does not rain, given that it did not rain the previous day, is 0.${q + 1}.`;
+    probabilityBulletTwo = `the probability that it does not rain, given that it did not rain the previous day, is 0.${
+      q + 1
+    }.`;
     const pRained = k + 1;
     const qRained = 10 - k - 1;
     const qDidNotRain = q + 1;
@@ -183,29 +191,36 @@ function variablesToQn(variables: VariablesObject): [VariablesObject, QnContaine
     const exactlyOnce = RDD + DRD + DDR;
     const exactlyTwice = RRD + RDR + DRR;
 
-    ansB = `${RRR/1000}.`;
+    ansB = `${RRR / 1000}.`;
 
-
-    if (atLeast === 0) { // at most
+    if (atLeast === 0) {
+      // at most
       ansC = iiiDays === 1 ? `${(exactlyOnce + DDD) / 1000}.` : `${(exactlyOnce + exactlyTwice + DDD) / 1000}.`;
-    } else { // at least 
+    } else {
+      // at least
       ansC = iiiDays === 1 ? `${(exactlyOnce + exactlyTwice + RRR) / 1000}.` : `${(exactlyTwice + RRR) / 1000}.`;
     }
-    ansD = ivDays === 1 ?
-      `${new Fraction(DDR, exactlyOnce)}.`
-      : `${new Fraction(RDR + DRR, exactlyTwice)}.`;
+    ansD = ivDays === 1 ? `${new Fraction(DDR, exactlyOnce)}.` : `${new Fraction(RDR + DRR, exactlyTwice)}.`;
   }
-  const iiiOneOrTwo = oneDayArray[iiiDays - 1]+'.';
-  const ivOneOrTwo = oneDayArray[ivDays - 1]+'.';
+  const iiiOneOrTwo = oneDayArray[iiiDays - 1] + '.';
+  const ivOneOrTwo = oneDayArray[ivDays - 1] + '.';
   // question
   const questions: QnContainer = {
-    p, probabilityOfRain, probabilityBulletOne, probabilityBulletTwo, atLeast: atLeast===1 ? 'at least' : 'at most', iiiOneOrTwo, ivOneOrTwo
+    p,
+    probabilityOfRain,
+    probabilityBulletOne,
+    probabilityBulletTwo,
+    atLeast: atLeast === 1 ? 'at least' : 'at most',
+    iiiOneOrTwo,
+    ivOneOrTwo,
   };
 
   // answer
   const answers: AnswerContainer = {
-    ansB, ansC, ansD
-  }
+    ansB,
+    ansC,
+    ansD,
+  };
 
   return [variables, questions, answers];
 }

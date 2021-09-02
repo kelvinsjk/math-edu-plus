@@ -1,9 +1,8 @@
 import { qn0102, encode } from '../../../demos/01-eqns-inequalities/0102';
 
-
 const qCode1 = encode(3, 115, 60, 55, 120, 45, 30, 215, 90, 65, 130, 25, 50, 350, 260, 490);
 const { questions: q1, answers: a1, qnCode: qc1 } = qn0102({ qnCode: qCode1 });
-const { questions: q2, answers: a2 } = qn0102({ qnCode: "0T-,qJ%SKkNoC_u;"});
+const { questions: q2, answers: a2 } = qn0102({ qnCode: '0T-,qJ%SKkNoC_u;' });
 //console.log(q2);
 //console.log(a2);
 
@@ -56,13 +55,8 @@ test('0102', () => {
   expect(a2.ansFinal).toBe('2.45');
 
   for (let i = 0; i < 10; i++) {
-    const {
-      questions,
-      qnCode
-    } = qn0102();
-    const {
-      questions: q2,
-    } = qn0102({ qnCode: qnCode });
+    const { questions, qnCode } = qn0102();
+    const { questions: q2 } = qn0102({ qnCode: qnCode });
     expect(JSON.stringify(questions)).toBe(JSON.stringify(q2));
   }
 

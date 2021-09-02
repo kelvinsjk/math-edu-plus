@@ -1,19 +1,32 @@
 //import { getRandomInt, Term, Fraction } from
 //  // 'math-edu';
 //  '../../../../math-edu/src/index';
-import { getRandomInt, Term, Fraction, encode, decode, integrate, CosFn, SinFn, ExpFn, LnFn, simpsons, PowerFn } from '../../index'
+import {
+  getRandomInt,
+  Term,
+  Fraction,
+  encode,
+  decode,
+  integrate,
+  CosFn,
+  SinFn,
+  ExpFn,
+  LnFn,
+  simpsons,
+  PowerFn,
+} from '../../index';
 //import { ExpFn, PowerFn, bisection, simpsons, integrateByParts, encode, decode, getRandomInt, Expression } from 'math-edu-plus';
 
 interface VariablesObject {
-  type: number,
-  a: number,
+  type: number;
+  a: number;
 }
 
 /**
  * generate qn0803: integration techniques
  * @param options `{qnCode: string, type: number}`
  */
-function qn0905(options?: { qnCode?: string, type?: number }): qnOutput {
+function qn0905(options?: { qnCode?: string; type?: number }): qnOutput {
   // options
   const defaultOptions = {
     qnCode: '',
@@ -25,7 +38,7 @@ function qn0905(options?: { qnCode?: string, type?: number }): qnOutput {
   let questions: QnContainer, answers: AnswerContainer, variables: VariablesObject;
   if (optionsObject.qnCode) {
     // qnCode provided
-    const [type, a] = <number[]>decode(optionsObject.qnCode)
+    const [type, a] = <number[]>decode(optionsObject.qnCode);
     variables = { type, a };
     [variables, questions, answers] = variablesToQn(variables);
   } else {
@@ -42,20 +55,20 @@ function qn0905(options?: { qnCode?: string, type?: number }): qnOutput {
 }
 
 interface qnOutput {
-  variables: VariablesObject,
-  qnCode: string,
-  questions: QnContainer,
-  answers: AnswerContainer
+  variables: VariablesObject;
+  qnCode: string;
+  questions: QnContainer;
+  answers: AnswerContainer;
 }
 interface QnContainer {
-  eqn: string,
-  line: string,
-  lowerLimit: string,
-  upperLimit: string
+  eqn: string;
+  line: string;
+  lowerLimit: string;
+  upperLimit: string;
 }
 interface AnswerContainer {
-  ansA: string,
-  ansB: string,
+  ansA: string;
+  ansB: string;
 }
 
 function variablesToQn(variables: VariablesObject | number): [VariablesObject, QnContainer, AnswerContainer] {
@@ -68,7 +81,7 @@ function variablesToQn(variables: VariablesObject | number): [VariablesObject, Q
   const { type, a } = variables;
 
   // question & answer
-  let eqn: string, line: string, lowerLimit: string, upperLimit: string, ansA: string, ansB: string
+  let eqn: string, line: string, lowerLimit: string, upperLimit: string, ansA: string, ansB: string;
   if (type === 1 || type === 2) {
     // question
     const ax = new Term(a, 'x');
@@ -86,8 +99,12 @@ function variablesToQn(variables: VariablesObject | number): [VariablesObject, Q
     const cosX = new CosFn();
     const area = integrate.byParts(x2, type === 1 ? sinX : cosX, [0, type === 1 ? 90 : 60]);
     ansA = `${area.multiply(new Fraction(1, a))}`;
-    ansB = simpsons((x) => Math.PI*Math.pow(a * x, 4) * Math.pow(type === 1 ? Math.sin(a * x) : Math.cos(a * x), 2), 0, Math.PI / a / (type === 1 ? 2 : 3)).toFixed(3);
-  } else if (type===3) { 
+    ansB = simpsons(
+      (x) => Math.PI * Math.pow(a * x, 4) * Math.pow(type === 1 ? Math.sin(a * x) : Math.cos(a * x), 2),
+      0,
+      Math.PI / a / (type === 1 ? 2 : 3),
+    ).toFixed(3);
+  } else if (type === 3) {
     // question
     const ax = new Term(a, 'x');
     const a2x2 = new Term(a * a, 'x^2');
@@ -102,29 +119,29 @@ function variablesToQn(variables: VariablesObject | number): [VariablesObject, Q
     const eX = new ExpFn();
     const area = integrate.byParts(x2, eX, [0, 1]);
     ansA = `${area.multiply(new Fraction(1, a))}`;
-    ansB = simpsons((x) => Math.PI *Math.pow(a * x, 4) * Math.exp(2*a*x), 0, 1/a).toFixed(3);
-  } else { // type === 4
+    ansB = simpsons((x) => Math.PI * Math.pow(a * x, 4) * Math.exp(2 * a * x), 0, 1 / a).toFixed(3);
+  } else {
+    // type === 4
     // question
     const ax = new Term(a, 'x');
     eqn = `\\left( \\ln ${ax} \\right)^2`;
     const oneOverA = new Fraction(1, a);
     const twoOverA = new Fraction(2, a);
-    lowerLimit = `${oneOverA}`
+    lowerLimit = `${oneOverA}`;
     upperLimit = `${twoOverA}`;
     line = `x = ${upperLimit}`;
     // answer
     // integral of a (ln ax)^2 is invariant so we just find integration of (ln x)^2 and scale by 1/a
     const one = new PowerFn({ n: 0 });
-    const lnX = new LnFn({n:2});
+    const lnX = new LnFn({ n: 2 });
     const area = integrate.byParts(lnX, one, [1, 2]);
     ansA = `${area.multiply(new Fraction(1, a))}`;
-    ansB = simpsons((x) => Math.PI *Math.pow(Math.log(a*x), 4), 1/a, 2 / a).toFixed(3);
+    ansB = simpsons((x) => Math.PI * Math.pow(Math.log(a * x), 4), 1 / a, 2 / a).toFixed(3);
   }
 
   const questions = { eqn, line, lowerLimit, upperLimit };
-  const answers = { ansA, ansB }
+  const answers = { ansA, ansB };
   return [variables as VariablesObject, questions, answers];
 }
 
 export { qn0905 };
-

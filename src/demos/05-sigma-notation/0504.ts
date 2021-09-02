@@ -1,27 +1,26 @@
 import { getRandomInt, Fraction } from 'math-edu';
 import { Polynomial } from '../../../../math-edu/src/index';
-import { encode, decode } from '../../index'
+import { encode, decode } from '../../index';
 //import { ExpFn, PowerFn, bisection, simpsons, integrateByParts, encode, decode, getRandomInt, Expression } from 'math-edu-plus';
 
 interface VariablesObject {
-  type: number,
-  subtype: number,
-  shift?: number,
-  start?: number,
-  k?: number
+  type: number;
+  subtype: number;
+  shift?: number;
+  start?: number;
+  k?: number;
 }
-
 
 /**
  * generate qn0504: sigma notation
  * @param options `{qnCode: string, type: number, subtype: number}`
  */
-function qn0504(options?: {qnCode?: string, type?: number, subtype?: number}): qnOutput {
+function qn0504(options?: { qnCode?: string; type?: number; subtype?: number }): qnOutput {
   // options
   const defaultOptions = {
     qnCode: '',
     type: getRandomInt(1, 2),
-    subtype: getRandomInt(1, 2)
+    subtype: getRandomInt(1, 2),
   };
   const optionsObject = { ...defaultOptions, ...options };
 
@@ -36,7 +35,13 @@ function qn0504(options?: {qnCode?: string, type?: number, subtype?: number}): q
     // generate qn type
     [variables, questions, answers] = variablesToQn(optionsObject);
   }
-  const variablesArray = [variables.type, variables.subtype, <number>variables.shift, <number>variables.start, <number>variables.k];
+  const variablesArray = [
+    variables.type,
+    variables.subtype,
+    <number>variables.shift,
+    <number>variables.start,
+    <number>variables.k,
+  ];
   return {
     variables: variables,
     qnCode: encode(...variablesArray),
@@ -46,22 +51,22 @@ function qn0504(options?: {qnCode?: string, type?: number, subtype?: number}): q
 }
 
 interface qnOutput {
-  variables: VariablesObject,
-  qnCode: string,
-  questions: QnContainer,
-  answers: AnswerContainer
+  variables: VariablesObject;
+  qnCode: string;
+  questions: QnContainer;
+  answers: AnswerContainer;
 }
-interface QnContainer{
-  uN: string,
-  difference: string,
-  summation: string,
-  newSummation: string
+interface QnContainer {
+  uN: string;
+  difference: string;
+  summation: string;
+  newSummation: string;
 }
-interface AnswerContainer{
-  ansB: string,
-  tendsToZero: string,
-  sInf: string,
-  ansD: string
+interface AnswerContainer {
+  ansB: string;
+  tendsToZero: string;
+  sInf: string;
+  ansD: string;
 }
 
 function variablesToQn(variables: VariablesObject): [VariablesObject, QnContainer, AnswerContainer] {
@@ -76,7 +81,7 @@ function variablesToQn(variables: VariablesObject): [VariablesObject, QnContaine
     variables['k'] = getRandomInt(-2, Math.min(variables.start + variables.shift, 2), { avoid: [0] });
   }
   const { type, subtype, shift, start, k } = variables;
-  
+
   // question
   const uN = type === 1 ? 'u_n = \\frac{1}{n}' : 'u_n = \\frac{1}{n^2}';
   // set up f(n)
@@ -87,10 +92,10 @@ function variablesToQn(variables: VariablesObject): [VariablesObject, QnContaine
   let diffNum = type === 1 ? endIndex.subtract(startIndex) : endIndex.square().subtract(startIndex.square());
   let denOne = `${startIndex}`;
   denOne = denOne.length === 1 ? denOne : `( ${denOne} )`;
-  denOne = type === 1 ? denOne : `${denOne}^2`
+  denOne = type === 1 ? denOne : `${denOne}^2`;
   let denTwo = `${endIndex}`;
   denTwo = denTwo.length === 1 ? denTwo : `( ${denTwo} )`;
-  denTwo = type === 1 ? denTwo : `${denTwo}^2`
+  denTwo = type === 1 ? denTwo : `${denTwo}^2`;
   const difference = `u_{ ${startIndex} } - u_{ ${endIndex} } = \\frac{ ${diffNum} }{ ${denOne} ${denTwo} }`;
   // summation
   const summation = `\\sum_{ n = ${start + shift} }^N \\frac{ ${diffNum} }{ ${denOne} ${denTwo} }`;
@@ -100,13 +105,13 @@ function variablesToQn(variables: VariablesObject): [VariablesObject, QnContaine
   diffNum = type === 1 ? endIndex.subtract(startIndex) : endIndex.square().subtract(startIndex.square());
   denOne = `${startIndex}`;
   denOne = denOne.length === 1 ? denOne : `( ${denOne} )`;
-  denOne = type === 1 ? denOne : `${denOne}^2`
+  denOne = type === 1 ? denOne : `${denOne}^2`;
   denTwo = `${endIndex}`;
   denTwo = denTwo.length === 1 ? denTwo : `( ${denTwo} )`;
   denTwo = type === 1 ? denTwo : `${denTwo}^2`;
-  const newSummation = `\\sum_{ n = ${start + shift - k } }^N \\frac{ ${diffNum} }{ ${denTwo} ${denOne} }`;
-  
-  const questions = {uN, difference, summation, newSummation};
+  const newSummation = `\\sum_{ n = ${start + shift - k} }^N \\frac{ ${diffNum} }{ ${denTwo} ${denOne} }`;
+
+  const questions = { uN, difference, summation, newSummation };
 
   // answer
   const firstTerm = new Fraction(1, start).pow(type);
@@ -116,30 +121,36 @@ function variablesToQn(variables: VariablesObject): [VariablesObject, QnContaine
   let nEnd = N.add(subtype).subtract(shift);
   let ansDenOne = `${nEnd}`;
   ansDenOne = type === 1 || ansDenOne.length === 1 ? ansDenOne : `( ${ansDenOne} )`;
-  ansDenOne = type === 1 ? ansDenOne : `${ansDenOne}^2`
+  ansDenOne = type === 1 ? ansDenOne : `${ansDenOne}^2`;
   let nEnd2 = nEnd.subtract(1);
   let ansDenTwo = `${nEnd2}`;
   ansDenTwo = type === 1 || ansDenTwo.length === 1 ? ansDenTwo : `( ${ansDenTwo} )`;
-  ansDenTwo = type === 1 ? ansDenTwo : `${ansDenTwo}^2`
+  ansDenTwo = type === 1 ? ansDenTwo : `${ansDenTwo}^2`;
   // part (ii)
-  const ansB = subtype === 1 ? `${constant} - \\frac{1}{ ${ansDenOne} }` : `${constant} - \\frac{1}{ ${ansDenTwo} } - \\frac{1}{ ${ansDenOne} }`;
+  const ansB =
+    subtype === 1
+      ? `${constant} - \\frac{1}{ ${ansDenOne} }`
+      : `${constant} - \\frac{1}{ ${ansDenTwo} } - \\frac{1}{ ${ansDenOne} }`;
   // part (iii)
-  const tendsToZero = subtype === 1 ? `\\frac{1}{ ${ansDenOne} } \\to 0` : `\\frac{1}{ ${ansDenTwo} }, \\frac{1}{ ${ansDenOne} } \\ to 0`;
+  const tendsToZero =
+    subtype === 1 ? `\\frac{1}{ ${ansDenOne} } \\to 0` : `\\frac{1}{ ${ansDenTwo} }, \\frac{1}{ ${ansDenOne} } \\ to 0`;
   const sInf = `= ${constant}`;
   // part(iv)
   nEnd = N.add(subtype).subtract(shift).add(k);
   ansDenOne = `${nEnd}`;
   ansDenOne = type === 1 || ansDenOne.length === 1 ? ansDenOne : `( ${ansDenOne} )`;
-  ansDenOne = type === 1 ? ansDenOne : `${ansDenOne}^2`
+  ansDenOne = type === 1 ? ansDenOne : `${ansDenOne}^2`;
   nEnd2 = nEnd.subtract(1);
   ansDenTwo = `${nEnd2}`;
   ansDenTwo = type === 1 || ansDenTwo.length === 1 ? ansDenTwo : `( ${ansDenTwo} )`;
-  ansDenTwo = type === 1 ? ansDenTwo : `${ansDenTwo}^2`
-  const ansD = subtype === 1 ? `${constant} - \\frac{1}{ ${ansDenOne} }` : `${constant} - \\frac{1}{ ${ansDenTwo} } - \\frac{1}{ ${ansDenOne} }`;
+  ansDenTwo = type === 1 ? ansDenTwo : `${ansDenTwo}^2`;
+  const ansD =
+    subtype === 1
+      ? `${constant} - \\frac{1}{ ${ansDenOne} }`
+      : `${constant} - \\frac{1}{ ${ansDenTwo} } - \\frac{1}{ ${ansDenOne} }`;
 
-  const answers = { ansB, tendsToZero, sInf, ansD}
+  const answers = { ansB, tendsToZero, sInf, ansD };
   return [variables, questions, answers];
 }
 
 export { qn0504 };
-

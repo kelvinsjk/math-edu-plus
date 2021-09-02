@@ -9,21 +9,21 @@ test('determinant', () => {
   expect(det1).toBe(-2);
   expect(det2).toBe(-61);
 
-  expect(()=>determinant(1)).toThrow();
+  expect(() => determinant(1)).toThrow();
 });
 
 test('cramers', () => {
   expect(xy1[0]).toBe(-1);
   expect(xy1[1]).toBe(2);
-  expect(xy2[0]).toBe(3.50);
-  expect(xy2[1]).toBe(2.60);
-  expect(xy2[2]).toBe(4.90);
+  expect(xy2[0]).toBe(3.5);
+  expect(xy2[1]).toBe(2.6);
+  expect(xy2[2]).toBe(4.9);
   expect(() => cramers(1)).toThrow();
-  expect(() => cramers(1,1,1,2,2,2)).toThrow();
-  expect(() => cramers(1,1,1,1,2,2,2,2,3,4,5,6)).toThrow();
-})
+  expect(() => cramers(1, 1, 1, 2, 2, 2)).toThrow();
+  expect(() => cramers(1, 1, 1, 1, 2, 2, 2, 2, 3, 4, 5, 6)).toThrow();
+});
 
 test('bisection', () => {
   expect(() => bisection((x) => x, 1, 2)).toThrow();
-  expect(bisection((x) => x-1, -1, 2).toFixed(1)).toBe('1.0');
-})
+  expect(bisection((x) => x - 1, -1, 2).toFixed(1)).toBe('1.0');
+});

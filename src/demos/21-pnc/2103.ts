@@ -6,17 +6,17 @@ import { encode, decode, numberWithCommas } from '../../index';
 import { factorial } from 'simple-statistics';
 
 interface VariablesObject {
-  type: number,
-  subtype: string,
-  couples: number,
-  singles: number,
+  type: number;
+  subtype: string;
+  couples: number;
+  singles: number;
 }
 
 /**
  * generate qn2503: normal distribution
  * @param options `{qnCode: string}
  */
-function qn2103(options?: { qnCode?: string, type?: number, subtype?: string }): qnOutput {
+function qn2103(options?: { qnCode?: string; type?: number; subtype?: string }): qnOutput {
   // options
   const defaultOptions = {
     qnCode: '',
@@ -38,11 +38,11 @@ function qn2103(options?: { qnCode?: string, type?: number, subtype?: string }):
     };
     [variables, questions, answers] = variablesToQn(variables);
   } else {
-    const subtypes = ['a', 'b']
+    const subtypes = ['a', 'b'];
     const type = optionsObject.type === 0 ? getRandomInt(1, 2) : optionsObject.type;
     const subtype = optionsObject.subtype === '' ? subtypes[getRandomInt(0, 1)] : optionsObject.subtype;
-    const couples = subtype === 'a' ? getRandomInt(3, 6) : getRandomInt(3,5);
-    const singles = subtype === 'a' ? 0 : getRandomInt(1, 6-couples);
+    const couples = subtype === 'a' ? getRandomInt(3, 6) : getRandomInt(3, 5);
+    const singles = subtype === 'a' ? 0 : getRandomInt(1, 6 - couples);
     variables = { type, subtype, couples, singles };
     [variables, questions, answers] = variablesToQn(variables);
   }
@@ -56,27 +56,27 @@ function qn2103(options?: { qnCode?: string, type?: number, subtype?: string }):
 }
 
 interface qnOutput {
-  variables: VariablesObject,
-  qnCode: string,
-  questions: QnContainer,
-  answers: AnswerContainer
+  variables: VariablesObject;
+  qnCode: string;
+  questions: QnContainer;
+  answers: AnswerContainer;
 }
 interface QnContainer {
-  total: number,
-  couples: number,
-  singles: number,
-  men: string,
-  women: string,
+  total: number;
+  couples: number;
+  singles: number;
+  men: string;
+  women: string;
 }
 interface AnswerContainer {
-  ansIA: string,
-  ansIB: string,
-  ansIC?: string,
-  ansID?: string,
-  ansIIA: string,
-  ansIIB: string,
-  ansIIC: string,
-  ansIID?: string,
+  ansIA: string;
+  ansIB: string;
+  ansIC?: string;
+  ansID?: string;
+  ansIIA: string;
+  ansIIB: string;
+  ansIIC: string;
+  ansIID?: string;
 }
 
 function variablesToQn(variables: VariablesObject): [VariablesObject, QnContainer, AnswerContainer] {
@@ -88,24 +88,42 @@ function variablesToQn(variables: VariablesObject): [VariablesObject, QnContaine
 
   // question
   const questions: QnContainer = {
-    total, couples, singles, men, women
+    total,
+    couples,
+    singles,
+    men,
+    women,
   };
 
   // answer
-  const ansIA =  numberWithCommas(factorial(total)) + '.'; // total
+  const ansIA = numberWithCommas(factorial(total)) + '.'; // total
   const ansIIA = numberWithCommas(factorial(total - 1)) + '.'; // total, circle
-  const ansIB =  numberWithCommas(factorial(2*singles+couples)*Math.pow(2, couples)) + '.'; // couples together
+  const ansIB = numberWithCommas(factorial(2 * singles + couples) * Math.pow(2, couples)) + '.'; // couples together
   const ansIID = numberWithCommas(factorial(2 * singles + couples - 1) * Math.pow(2, couples)) + '.'; // couples together, circle
-  const ansIC =  numberWithCommas(factorial(singles + couples) * factorial(singles + couples) * 2) + '.'; // alternate
+  const ansIC = numberWithCommas(factorial(singles + couples) * factorial(singles + couples) * 2) + '.'; // alternate
   const ansIIB = numberWithCommas(factorial(singles + couples) * factorial(singles + couples - 1)) + '.'; // alternate, circle
-  const ansID =  numberWithCommas(factorial(couples + singles) * factorial(singles) * 2) + '.'; // alternate, couples together
+  const ansID = numberWithCommas(factorial(couples + singles) * factorial(singles) * 2) + '.'; // alternate, couples together
   const ansIIC = numberWithCommas(factorial(couples + singles - 1) * factorial(singles) * 2) + '.'; // alternate, couples together, circle
 
-  const answers: AnswerContainer = subtype === 'a' ? {
-    ansIA, ansIB, ansIIA, ansIIB, ansIIC, 
-  } : {
-    ansIA, ansIB, ansIC, ansID, ansIIA, ansIIB, ansIIC, ansIID
-  }
+  const answers: AnswerContainer =
+    subtype === 'a'
+      ? {
+          ansIA,
+          ansIB,
+          ansIIA,
+          ansIIB,
+          ansIIC,
+        }
+      : {
+          ansIA,
+          ansIB,
+          ansIC,
+          ansID,
+          ansIIA,
+          ansIIB,
+          ansIIC,
+          ansIID,
+        };
 
   return [variables, questions, answers];
 }

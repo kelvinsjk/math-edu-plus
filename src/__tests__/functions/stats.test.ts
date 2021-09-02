@@ -15,17 +15,17 @@ const X_plus_2 = X.plus(2);
 test('stats', () => {
   expect(binomPdf(5, 0.1, 2).toPrecision(3)).toBe('0.0729');
   expect(binomCdf(5, 0.1, 2).toPrecision(5)).toBe('0.99144');
-  expect(binomCdfRange(10,0.3,2,3).toPrecision(3)).toBe('0.500');
+  expect(binomCdfRange(10, 0.3, 2, 3).toPrecision(3)).toBe('0.500');
   expect(normCdf(0, 1, { upper: 2 }).toPrecision(3)).toBe('0.977');
   expect(normCdf(5, 2, { lower: 2 }).toPrecision(3)).toBe('0.933');
   expect(normCdf(5, 2, { lower: 2, upper: 3 }).toPrecision(3)).toBe('0.0918');
   expect(invNorm(0.3).toPrecision(3)).toBe('-0.524');
-  expect(invNorm(0.3,0,1,'right').toPrecision(3)).toBe('0.524');
-  expect(invNorm(0.3,0,1,'center').toPrecision(3)).toBe('0.385');
-  expect(invNorm(0.3,5,7).toPrecision(3)).toBe('1.33');
-  expect(zTest(10,5,9,20).toPrecision(3)).toBe('0.186');
-  expect(zTest(10,5,9,20,'two').toPrecision(3)).toBe('0.371');
-  expect(zTest(10,5,11,20,'two').toPrecision(3)).toBe('0.371');
+  expect(invNorm(0.3, 0, 1, 'right').toPrecision(3)).toBe('0.524');
+  expect(invNorm(0.3, 0, 1, 'center').toPrecision(3)).toBe('0.385');
+  expect(invNorm(0.3, 5, 7).toPrecision(3)).toBe('1.33');
+  expect(zTest(10, 5, 9, 20).toPrecision(3)).toBe('0.186');
+  expect(zTest(10, 5, 9, 20, 'two').toPrecision(3)).toBe('0.371');
+  expect(zTest(10, 5, 11, 20, 'two').toPrecision(3)).toBe('0.371');
   expect(zTest(10, 5, 11, 20, 'right').toPrecision(3)).toBe('0.186');
 
   expect(X.moreThan(2)).toBeCloseTo(0.933, 3);
@@ -53,5 +53,4 @@ test('stats', () => {
 
   expect(() => new Normal(-2, -3)).toThrow();
   expect(() => X.divide(0)).toThrow();
-  
-})
+});

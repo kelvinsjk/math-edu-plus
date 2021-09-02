@@ -1,12 +1,11 @@
 import { qn0803 } from '../../../demos/08-integration/0803';
 import { encode } from '../../../fns/encode/encoders';
 
-
 const qCode1 = encode(1, 'a', 1, 5, 3);
 const { questions: q1, answers: a1, qnCode: qc1 } = qn0803({ qnCode: qCode1 });
-const { questions: q2, answers: a2 } = qn0803({ qnCode: "1b854" });
-const { questions: q3, answers: a3 } = qn0803({ qnCode: "2a912" });
-const { questions: q4, answers: a4 } = qn0803({ qnCode: "2b816" });
+const { questions: q2, answers: a2 } = qn0803({ qnCode: '1b854' });
+const { questions: q3, answers: a3 } = qn0803({ qnCode: '2a912' });
+const { questions: q4, answers: a4 } = qn0803({ qnCode: '2b816' });
 //console.log(q1);
 //console.log(a1);
 //console.log(qc1);
@@ -35,15 +34,9 @@ test('0803', () => {
   expect(a4.ans1).toBe('\\frac{3}{64}');
   expect(a4.ans2).toBe('- \\frac{3}{32} + \\frac{1}{6} \\pi');
 
-
   for (let i = 0; i < 10; i++) {
-    const {
-      questions,
-      qnCode
-    } = qn0803();
-    const {
-      questions: q2,
-    } = qn0803({ qnCode: qnCode });
+    const { questions, qnCode } = qn0803();
+    const { questions: q2 } = qn0803({ qnCode: qnCode });
     expect(JSON.stringify(questions)).toBe(JSON.stringify(q2));
   }
 

@@ -5,22 +5,22 @@ import { getRandomInt } from 'math-edu';
 import { Normal, encode, decode } from '../../index';
 
 interface VariablesObject {
-  type: number,
-  xMuGen: number,
-  xSigma10: number,
-  xPriceGen: number,
-  yMuGen: number,
-  ySigmaGen: number,
-  yPrice: number,
-  xAdd10: number,
-  yAddGen: number,
+  type: number;
+  xMuGen: number;
+  xSigma10: number;
+  xPriceGen: number;
+  yMuGen: number;
+  ySigmaGen: number;
+  yPrice: number;
+  xAdd10: number;
+  yAddGen: number;
 }
 
 /**
  * generate qn2503: normal distribution
  * @param options `{qnCode: string}
  */
-function qn2503(options?: { qnCode?: string, type?: number }): qnOutput {
+function qn2503(options?: { qnCode?: string; type?: number }): qnOutput {
   // options
   const defaultOptions = {
     qnCode: '',
@@ -54,12 +54,22 @@ function qn2503(options?: { qnCode?: string, type?: number }): qnOutput {
     const yMuGen = getRandomInt(0, 9);
     const ySigmaGen = getRandomInt(0, 9);
     const yPrice = getRandomInt(1, 9);
-    const xAdd10 = getRandomInt(1, Math.min(2 * xPriceGen * xSigma10 / 2, 9));
+    const xAdd10 = getRandomInt(1, Math.min((2 * xPriceGen * xSigma10) / 2, 9));
     const yAddGen = getRandomInt(1, 9);
     variables = { type, xMuGen, xSigma10, xPriceGen, yMuGen, ySigmaGen, yPrice, xAdd10, yAddGen };
     [variables, questions, answers] = variablesToQn(variables);
   }
-  const variablesArray = [variables.type, variables.xMuGen, variables.xSigma10, variables.xPriceGen, variables.yMuGen, variables.ySigmaGen, variables.yPrice, variables.xAdd10, variables.yAddGen];
+  const variablesArray = [
+    variables.type,
+    variables.xMuGen,
+    variables.xSigma10,
+    variables.xPriceGen,
+    variables.yMuGen,
+    variables.ySigmaGen,
+    variables.yPrice,
+    variables.xAdd10,
+    variables.yAddGen,
+  ];
   return {
     variables,
     qnCode: encode(...variablesArray),
@@ -69,26 +79,26 @@ function qn2503(options?: { qnCode?: string, type?: number }): qnOutput {
 }
 
 interface qnOutput {
-  variables: VariablesObject,
-  qnCode: string,
-  questions: QnContainer,
-  answers: AnswerContainer
+  variables: VariablesObject;
+  qnCode: string;
+  questions: QnContainer;
+  answers: AnswerContainer;
 }
 interface QnContainer {
-  xMu: number,
-  xSigma: number,
-  yMu: number,
-  ySigma: number,
-  xPrice: number,
-  yPrice: number,
-  exceedPrice1: number,
-  exceedPrice2: number,
+  xMu: number;
+  xSigma: number;
+  yMu: number;
+  ySigma: number;
+  xPrice: number;
+  yPrice: number;
+  exceedPrice1: number;
+  exceedPrice2: number;
 }
 interface AnswerContainer {
-  ansA: string,
-  ansB: string,
-  ansC: string,
-  ansD?: string
+  ansA: string;
+  ansB: string;
+  ansC: string;
+  ansD?: string;
 }
 
 function variablesToQn(variables: VariablesObject): [VariablesObject, QnContainer, AnswerContainer] {
@@ -107,11 +117,18 @@ function variablesToQn(variables: VariablesObject): [VariablesObject, QnContaine
   const exceedPrice1 = (xMu10 * xPriceGen + 2 * xAdd10) / 20;
 
   const yAdd10 = yAddGen * 5;
-  const exceedPrice2 = (yMu10*yPrice + yAdd10) / 10;
+  const exceedPrice2 = (yMu10 * yPrice + yAdd10) / 10;
 
   // question
   const questions: QnContainer = {
-    xMu, xSigma, xPrice, yMu, ySigma, yPrice, exceedPrice1, exceedPrice2
+    xMu,
+    xSigma,
+    xPrice,
+    yMu,
+    ySigma,
+    yPrice,
+    exceedPrice1,
+    exceedPrice2,
   };
 
   // answer
@@ -131,14 +148,14 @@ function variablesToQn(variables: VariablesObject): [VariablesObject, QnContaine
   const p4 = X1X5MinusY.lessThan(0);
 
   const answers: AnswerContainer = {
-    ansA: (p1).toPrecision(3) + '.',
-    ansB: (p2).toPrecision(3) + '.',
-    ansC: (p4).toFixed(4) + '.',
-  }
+    ansA: p1.toPrecision(3) + '.',
+    ansB: p2.toPrecision(3) + '.',
+    ansC: p4.toFixed(4) + '.',
+  };
   if (type === 1) {
     answers.ansC = p3.toPrecision(3) + '.';
-    answers['ansD'] = 'The event in part (ii) is a subset of the event in part (iii).'
-  } 
+    answers['ansD'] = 'The event in part (ii) is a subset of the event in part (iii).';
+  }
   return [variables, questions, answers];
 }
 

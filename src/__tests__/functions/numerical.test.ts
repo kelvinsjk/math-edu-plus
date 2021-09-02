@@ -1,7 +1,6 @@
-
 // import { ExpFn, PowerFn, CosFn, SinFn, LnFn, integrateByParts, simpsons, bisection, Angle } from '../../index';
-import { ExpFn, PowerFn, } from '../../../../math-edu/src/index';
-import {  simpsons, bisection } from '../../index';
+import { ExpFn, PowerFn } from '../../../../math-edu/src/index';
+import { simpsons, bisection } from '../../index';
 
 const ex = new ExpFn();
 const threeX = new PowerFn({ coeff: 3 });

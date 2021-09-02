@@ -1,7 +1,6 @@
 import { qn2103 } from '../../../demos/21-pnc/2103';
 import { encode } from '../../../fns/encode/encoders';
 
-
 const qCode1 = encode(1, 'a', 6, 0);
 const { questions: q1, answers: a1, qnCode: qc1 } = qn2103({ qnCode: qCode1 });
 const { questions: q2, answers: a2 } = qn2103({ qnCode: '2b51' });
@@ -13,7 +12,7 @@ const { questions: q3, answers: a3 } = qn2103({ qnCode: '2b32' });
 //console.log(qnCode);
 
 test('2103', () => {
-  expect(qc1).toBe("1a60");
+  expect(qc1).toBe('1a60');
   expect(q1.total).toBe(12);
   expect(q1.couples).toBe(6);
   expect(a1.ansIA).toBe('479,001,600.');
@@ -49,13 +48,8 @@ test('2103', () => {
   expect(a3.ansIID).toBe('5,760.');
 
   for (let i = 0; i < 10; i++) {
-    const {
-      questions,
-      qnCode
-    } = qn2103();
-    const {
-      questions: q2,
-    } = qn2103({ qnCode: qnCode });
+    const { questions, qnCode } = qn2103();
+    const { questions: q2 } = qn2103({ qnCode: qnCode });
     expect(JSON.stringify(questions)).toBe(JSON.stringify(q2));
   }
 

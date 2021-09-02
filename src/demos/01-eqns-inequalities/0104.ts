@@ -4,7 +4,11 @@ import { getRandomInt, Expression } from '../../../../math-edu/src/index';
 
 import {
   // getRandomInt, Expression,
-  ExpFn, PowerFn, bisection, simpsons, integrate
+  ExpFn,
+  PowerFn,
+  bisection,
+  simpsons,
+  integrate,
 } from '../../index';
 
 /**
