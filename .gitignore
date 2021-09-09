@@ -4,3 +4,5 @@ node_modules/
 /docs
 /coverage
 /index.html
+# demos and tests related to them
+/demos
