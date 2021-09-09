@@ -5,4 +5,5 @@ node_modules/
 /coverage
 /index.html
 # demos and tests related to them
-/demos
+/src/demos
+/src/__tests__/demos
