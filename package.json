@@ -1,6 +1,6 @@
 {
   "name": "math-edu-plus",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "extras for the math-edu package",
   "main": "lib/index.cjs.js",
   "module": "lib/index.esm.js",
