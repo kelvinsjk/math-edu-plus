@@ -1,5 +1,5 @@
 // import { Polynomial, getRandomFrac, Fraction } from 'math-edu';
-import { getRandomFrac, Polynomial, Fraction } from 'math-edu';
+import { getRandomFrac, Polynomial, Fraction, factorize } from 'math-edu';
 // '../../../../math-edu/src/index';
 
 /**
@@ -13,14 +13,18 @@ function getNiceQuadratic(avoid?: number[]): niceQuadraticOutput {
   avoid = avoid === undefined ? [] : avoid;
   const root1 = getRandomFrac({ denMin: 1, denMax: 2, avoid: [...avoid] });
   const root2 = getRandomFrac({ denMin: 1, denMax: 4, avoid: [root1, ...avoid] });
-  const factor1 = root1.toFactor(),
-    factor2 = root2.toFactor();
-  const quadratic = factor1.multiply(factor2);
-  const a = quadratic.terms[0].coeff.num,
-    b = quadratic.terms[1].coeff.num,
-    c = quadratic.terms[2].coeff.num;
+  let a = root1.den * root2.den,
+  b = -root1.den * root2.num - root2.den * root1.num,
+  c = root1.num * root2.num;
+  [[a,b,c]] = factorize(a,b,c)
+  //const factor1 = root1.toFactor(),
+  //factor2 = root2.toFactor();
+  //const quadratic = factor1.multiply(factor2);
+  //const a = quadratic.terms[0].coeff.num,
+  //  b = quadratic.terms[1].coeff.num,
+  //  c = quadratic.terms[2].coeff.num;
   return {
-    quadratic: quadratic,
+    quadratic: new Polynomial([a,b,c]),
     coefficients: [a, b, c],
     roots: [root1, root2],
   };
