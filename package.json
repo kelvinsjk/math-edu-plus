@@ -61,7 +61,7 @@
     "lib"
   ],
   "dependencies": {
-    "math-edu": "^0.0.9",
+    "math-edu": "^0.0.10",
     "math-erfinv": "^1.0.0",
     "simple-statistics": "^7.7.0"
   }

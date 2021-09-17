@@ -5,6 +5,8 @@ import {
   Term,
   Expression,
   Polynomial,
+  AP,
+  GP,
   Angle,
   Trig,
   Exp,
@@ -24,6 +26,7 @@ import {
   integrate,
   differentiate,
   maclaurin,
+  DE,
   gcd,
   factorize,
   solveQuadratic,
@@ -52,23 +55,35 @@ import { getNiceQuadratic } from './fns/random/generateNice';
 import { getRandomPerp } from './fns/random/generateSpecialVectors';
 
 import { encode, decode } from './fns/encode/encoders';
+import { factorial } from 'simple-statistics';
 
 export {
+  //// `math-edu` re-exports
+  // base
   Fraction,
   NthRoot,
   SquareRoot,
+  // algebra
   Term,
   Expression,
   Polynomial,
+  // trig
   Angle,
   Trig,
+  // exp, ln
   Exp,
   Ln,
+  // complex
   Complex,
   ComplexExp,
+  // vectors
   Vector,
   Line,
   Plane,
+  // sequences and series
+  AP,
+  GP,
+  // functions
   gcd,
   factorize,
   solveQuadratic,
@@ -77,7 +92,9 @@ export {
   getRandomLinear,
   getRandomQuadratic,
   getRandomVec,
+  // misc
   RationalFunction,
+  // calculus
   ExpFn,
   LnFn,
   PowerFn,
@@ -85,23 +102,28 @@ export {
   LinearFn,
   SinFn,
   CosFn,
-  integrate,
   differentiate,
   maclaurin,
-  //// PLUS
+  integrate,
+  DE,
+  //// `math-edu-plus` new features
+  // functions: composite and inverse functions, intervals
   Interval,
   BasicFunction,
   GeneralFunction,
   FunctionChain,
   compose,
   canCompose,
+  // more random generators
   getRandomInts,
   getRandomPerp,
   getNiceQuadratic,
+  // numerical methods
   simpsons,
   bisection,
   cramers,
   determinant,
+  // stats
   Normal,
   binomPdf,
   binomCdf,
@@ -109,6 +131,8 @@ export {
   normCdf,
   invNorm,
   zTest,
+  factorial, // from 'simple-statistics'
+  // helper functions
   numberWithCommas,
   encode,
   decode,
